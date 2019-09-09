@@ -18,18 +18,10 @@
 		<option value="BDA">kurs5</option>
 	</select>
 <script charset="utf-8">
-	var BDAArray = new Array();
-	var ITBArray = new Array();
 	var categorySelect = document.getElementById("category");
 	categorySelect.addEventListener("change", filterOptions);
 	var courseSelect = document.getElementById("courseSelect");
-	for(var i = 0; i < courseSelect.children.length; i++) {
-		if(courseSelect.children[i].value == "BDA") {
-			BDAArray.push(courseSelect.children[i]);
-		} else if(courseSelect.children[i].value == "IT-Bachelor") {
-			ITBArray.push(courseSelect.children[i]);
-		}
-	}
+	
 	function filterOptions() {
 		courseSelect.value = "default";
 		if(categorySelect.value == "BDA") {
