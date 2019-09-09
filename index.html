@@ -10,6 +10,7 @@
 		<option value="IT-Bachelor">IT-Bachelor</option>
 	</select>
 	<select id="courseSelect" name="courseSelect">
+		<option value="default">Välj Kurs</option>
 		<option value="IT-Bachelor">kurs1</option>
 		<option value="IT-Bachelor">kurs2</option>
 		<option value="BDA">kurs3</option>
@@ -30,9 +31,9 @@
 		}
 	}
 	function filterOptions() {
+		courseSelect.value = "default";
 		if(categorySelect.value == "BDA") {
 			for(var i = 0; i < courseSelect.length; i++) {
-			console.log(courseSelect.children[i]);
 				if(courseSelect.children[i].value == "BDA") {
 					courseSelect.children[i].style.display = "block";
 				} else if(courseSelect.children[i].value == "IT-Bachelor") {
