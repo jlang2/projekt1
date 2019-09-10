@@ -3,6 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+	<script src="https://unpkg.com/react@16.9.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.9.0/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body onload="filterOptions()">
 	<select id="category" name="category">
@@ -17,6 +20,22 @@
 		<option value="BDA">kurs4</option>
 		<option value="BDA">kurs5</option>
 	</select>
+	<div id="demo"></div>
+	<script type="text/babel">
+		
+            	function App(){
+                	return (
+                    	<div>
+                        	<Welcome name="Sebastian" />
+                        	<Welcome name="Skurk" />
+                    	</div>
+                	);
+            	}
+            	ReactDOM.render(       //(komponent,hook), reactDOM är virtuell, render metoden skapar "riktiga" DOM
+                <App />,                                                        
+                document.getElementById("demo")     //en div sim heter root är tyypiskt react
+            );
+	</script>
 <script charset="utf-8">
 	var categorySelect = document.getElementById("category");
 	categorySelect.addEventListener("change", filterOptions);
