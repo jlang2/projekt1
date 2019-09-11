@@ -43,6 +43,10 @@
             	function App(){
                 	return (
 				<div>
+				<select id="teachers" name="teachers">
+					<option value="teacher1">teacher1</option>
+					<option value="teacher2">teacher2</option>
+				</select>
 				<select id="category" name="category">
 					<option value="BDA">BDA</option>
 					<option value="IT-Bachelor">IT-Bachelor</option>
@@ -55,6 +59,8 @@
 					<option value="BDA">kurs4</option>
 					<option value="BDA">kurs5</option>
 				</select>
+				<input type="text" name="hours" id="hours" placeholder="Timantal" defaultValue=""></input>
+				<input type="submit" name="submit" id="submit" value="Skicka"></input>
 				</div>
                 	);
             	}
