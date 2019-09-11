@@ -1,0 +1,46 @@
+body {
+    background-color:salmon;
+    margin:0;
+
+}
+
+section {
+    padding:10px 10px;
+    text-align: center;
+    
+    
+}
+
+
+ul {
+    padding: 10px 0;
+    background-color:rgb(255, 51, 0);
+    border: solid;
+    
+}
+
+li {
+    display: inline;
+    background-color:rgb(255, 51, 0);
+    padding: 10px;
+
+   
+
+}
+
+li a {
+    color:white;
+    font-weight: bold;
+    padding:10px;
+    text-decoration: none;
+
+}
+
+li a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    padding: 10px;
+
+}
