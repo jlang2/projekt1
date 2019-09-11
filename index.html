@@ -26,5 +26,157 @@
                 document.getElementById("demo")                                     //en div sim heter root är tyypiskt react
             );
         </script>
+
+<!--DROP DOWN MENY-->
+
+<p>Click on the button to open the dropdown menu.</p>
+
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#si">si</a>
+    <a href="#dig">dig</a>
+    <a href="#iröven">iröven</a>
+  </div>
+</div>
+
+<!--SCRIPT FÖR DROPDOWN MENY-->
+<script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+        </script>
+
+
+
+<!--table för att sortera shittii-->
+<table style="width:100%">
+
+    <tr id="tr1">
+      <th id="nmr1">#</th>      
+      <th id="k1">Kurser/Forskning</th>
+      <th id="p1">P1</th> 
+      <th id="p2">P2</th>
+      <th id ="p3">P3</th>
+      <th id="p4">P4</th>
+      <th id="p5">P5</th>
+    </tr>
+
+    <tr>
+      <td>1</td>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>2</td>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>3</td>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>4</td>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+        <td>5</td>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>6</td>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <td></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>7</td>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <td></td>
+        <td></td>
+    </tr>
+
+
+
+
+  </table>
+  <br>
+
+  <!--
+  <table id="t01">
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th> 
+      <th>Age</th>
+    </tr>
+    <tr>
+      <td>Jill</td>
+      <td>Smith</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <td>Eve</td>
+      <td>Jackson</td>
+      <td>94</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>80</td>
+    </tr>
+  </table>
+-->
     </body>
 </html>
