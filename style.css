@@ -93,11 +93,9 @@ th#p4 {
     border-width: 5px;
   
 }
-th#p5 {
-    background-color:green;
-    border-style: solid;
-    border-width: 5px;
-  
+#idtable{
+  position:relative;
+  top: 40px;
 }
  
 /*DROP DOWN MENY*/
