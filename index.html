@@ -39,33 +39,58 @@
 	</script>
 	
 	<script type="text/babel">
-		
-            	function App(){
-                	return (
-				<div>
-				<select id="teachers" name="teachers">
-					<option value="teacher1">teacher1</option>
-					<option value="teacher2">teacher2</option>
-				</select>
-				<select id="category" name="category">
-					<option value="BDA">BDA</option>
-					<option value="IT-Bachelor">IT-Bachelor</option>
-				</select>
+	
+		function Courses() {
+			return (
 				<select id="courseSelect" name="courseSelect">
-					<option value="default">Välj Kurs</option>
-					<option value="IT-Bachelor">kurs1</option>
-					<option value="IT-Bachelor">kurs2</option>
-					<option value="BDA">kurs3</option>
-					<option value="BDA">kurs4</option>
-					<option value="BDA">kurs5</option>
+				<option value="default">Välj Kurs</option>
+				<option value="IT-Bachelor">kurs1</option>
+				<option value="IT-Bachelor">kurs2</option>
+				<option value="BDA">kurs3</option>
+				<option value="BDA">kurs4</option>
+				<option value="BDA">kurs5</option>
 				</select>
+			)
+		}
+
+		function Teachers() {
+			return (
+				<select id="teachers" name="teachers">
+				<option value="teacher1">teacher1</option>
+				<option value="teacher2">teacher2</option>
+				</select>
+			)
+		}
+
+		function Categories() {
+			return (
+				<select id="category" name="category">
+				<option value="BDA">BDA</option>
+				<option value="IT-Bachelor">IT-Bachelor</option>
+				</select>
+			)
+		}
+
+		function Hours() {
+			return (
 				<input type="text" name="hours" id="hours" placeholder="Timantal" defaultValue=""></input>
+			)
+		}
+
+		function Send() {
+			return (
 				<input type="submit" name="submit" id="submit" value="Skicka"></input>
-				</div>
-                	);
-            	}
+			)
+		}
+
             	ReactDOM.render(       //(komponent,hook), reactDOM är virtuell, render metoden skapar "riktiga" DOM
-                <App />,                                                        
+		<div id="rows-parent">
+		<Teachers />
+		<Categories />
+		<Courses />
+		<Hours />
+		<Send />
+		</div>,                                                        
                 document.getElementById("root")     //en div sim heter root är tyypiskt react
             );
 	</script>
