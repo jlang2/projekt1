@@ -137,3 +137,7 @@ th#p4 {
   .dropdown a:hover {background-color: #ddd;}
   
   .show {display: block;}
+
+  #root {
+    padding-top: 15px;
+  }
