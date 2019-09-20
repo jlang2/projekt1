@@ -40,7 +40,8 @@
 	</script>
 	
 	<script type="text/babel">
-	
+  import React, {Component} from 'react';
+  
 		function Courses() {
 			return (
 				<select id="courseSelect" name="courseSelect">
@@ -52,16 +53,20 @@
 				<option value="BDA">kurs5</option>
 				</select>
 			)
-		}
+    }
 
-		function Teachers() {
-			return (
-				<select id="teachers" name="teachers">
-				<option value="teacher1">teacher1</option>
-				<option value="teacher2">teacher2</option>
-				</select>
-			)
-		}
+  	  class Teachers extends Component {
+          render () {
+            return (
+                jsonData.Personal.map((personal) => {
+              return (
+                <li>{personal.Efternamn}</li>
+              );
+              })
+            )
+        }
+      }
+
 
 		function Categories() {
 			return (
