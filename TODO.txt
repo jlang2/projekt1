@@ -1,15 +1,15 @@
-- Man v‰ljer l‰rare, BDA eller IT-Bachelor, kurs, timantal och skickar in till tabellen pÂ fˆljande s‰tt:
+- Man v√§ljer l√§rare, BDA eller IT-Bachelor, kurs, timantal och skickar in till tabellen p√• f√∂ljande s√§tt:
 
-- L‰rarnamnet kommer pÂ # table rowin. 
+- L√§rarnamnet kommer p√• # table rowin. 
 
-- PÂ kurser/forskning rowin ska det komma kursnamn och kurskod frÂn json objekte
-  eller bara Forskning som man kan v‰lja pÂ dropdownen.
+- P√• kurser/forskning rowin ska det komma kursnamn och kurskod fr√•n json objekte
+  eller bara Forskning som man kan v√§lja p√• dropdownen.
 
-- IA och BDA har egna kurser i sig som syns i json filen om IA ‰r valt skall bara IAs kurser synnas. Samma med BDA.
+- IA och BDA har egna kurser i sig som syns i json filen om IA √§r valt skall bara IAs kurser synnas. Samma med BDA.
 
-- Kurs timmarna kommer frÂn json objekte alltsÂ oftast 100 timmar, OBS! (pÂ forskning skall man sj‰lv kunna s‰tta till timmar).
+- Kurs timmarna kommer fr√•n json objekte allts√• oftast 100 timmar, OBS! (p√• forskning skall man sj√§lv kunna s√§tta till timmar).
 
-- Timmarna l‰ggs in i perioder table rowina enligt r‰tta perioder frÂn json objekten,
-Perioderna ‰r connected med r‰tta period tablerows frÂn json objekte. (P1, P2, P3, P4).
+- Timmarna l√§ggs in i perioder table rowina enligt r√§tta perioder fr√•n json objekten,
+Perioderna √§r connected med r√§tta period tablerows fr√•n json objekte. (P1, P2, P3, P4).
 
-- Om raderna tar slut mÂste det genereras nya rows.
+- Om raderna tar slut m√•ste det genereras nya rows.
