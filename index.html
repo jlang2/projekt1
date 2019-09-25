@@ -6,12 +6,12 @@
 	<script src="https://unpkg.com/react@16.9.0/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16.9.0/umd/react-dom.development.js"></script>
 		<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-		<script src="resursJSON.js"></script>
+		<script src="resurs.js"></script>
 </head>
 <body onload="filterOptions()">
 	<div id="root"></div>
 	<script charset="utf-8">
-		
+	
 	function filterOptions() {
 		
 		var categorySelect = document.getElementById("category");
@@ -40,7 +40,7 @@
 	</script>
 	
 	<script type="text/babel">
-	
+
 		function Courses() {
 			return (
 				<select id="courseSelect" name="courseSelect">
@@ -54,13 +54,20 @@
 			)
 		}
 
-		function Teachers() {
-			return (
-				<select id="teachers" name="teachers">
-				<option value="teacher1">teacher1</option>
-				<option value="teacher2">teacher2</option>
-				</select>
-			)
+		class Personal extends React.Component {
+			render() {
+				return (
+					<select>
+						{
+							jsondata.Personal.map((person) => {
+								return (
+									<option value="{person.Efternamn}">{person.Förnamn + " " + person.Efternamn}</option>
+								);	
+							})
+						}
+					</select>
+				)
+			}
 		}
 
 		function Categories() {
@@ -86,8 +93,8 @@
 
             	ReactDOM.render(       //(komponent,hook), reactDOM är virtuell, render metoden skapar "riktiga" DOM
 		<div id="rows-parent">
-      <Teachers />
       <Categories />
+      <Personal />
       <Courses />
       <Hours />
       <Send />
