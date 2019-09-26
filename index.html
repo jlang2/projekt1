@@ -5,13 +5,9 @@
 	<title></title>
 	<script src="https://unpkg.com/react@16.9.0/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16.9.0/umd/react-dom.development.js"></script>
-		<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<<<<<<< HEAD
-		<script src="resurs.js"></script>
-=======
-    <script src="resursJSON.js"></script>
-    <link rel ="stylesheet" href = "style.css"/>
->>>>>>> eab1777b7385cb3dc15c14173fc80fcd5ea38ec4
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script src="resurs.js"></script>
+	<link rel ="stylesheet" href = "style.css"/>
 </head>
 <body onload="filterOptions()">
 	<div id="root"></div>
@@ -45,13 +41,9 @@
 	</script>
 	
 	<script type="text/babel">
-<<<<<<< HEAD
 
-=======
-  import React, {Component} from 'react';
   
->>>>>>> eab1777b7385cb3dc15c14173fc80fcd5ea38ec4
-		function Courses() {
+	function Courses() {
 			return (
 				<select id="courseSelect" name="courseSelect">
 				<option value="default">Välj Kurs</option>
@@ -62,22 +54,9 @@
 				<option value="BDA">kurs5</option>
 				</select>
 			)
-    }
+	}
 
-  	  class Teachers extends Component {
-          render () {
-            return (
-                jsonData.Personal.map((personal) => {
-              return (
-                <li>{personal.Efternamn}</li>
-              );
-              })
-            )
-        }
-      }
-
-<<<<<<< HEAD
-		class Personal extends React.Component {
+  		class Personal extends React.Component {
 			render() {
 				return (
 					<select>
@@ -92,8 +71,6 @@
 				)
 			}
 		}
-=======
->>>>>>> eab1777b7385cb3dc15c14173fc80fcd5ea38ec4
 
 		function Categories() {
 			return (
