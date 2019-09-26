@@ -8,6 +8,10 @@
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 	<script src="resurs.js"></script>
 	<link rel ="stylesheet" href = "style.css"/>
+	<script src="https://unpkg.com/react-dom@16.9.0/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script src="resurs.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 </head>
 <body onload="filterOptions()">
 	<div id="root"></div>
@@ -44,6 +48,7 @@
 
   
 	function Courses() {
+		function Courses() {
 			return (
 				<select id="courseSelect" name="courseSelect">
 				<option value="default">Välj Kurs</option>
@@ -56,10 +61,12 @@
 			)
 	}
 
-  		class Personal extends React.Component {
+
+		class Personal extends React.Component {
 			render() {
 				return (
 					<select>
+
 						{
 							jsondata.Personal.map((person) => {
 								return (
