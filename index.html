@@ -62,14 +62,13 @@
 			render() {
 				return (
 					<select>
-
 						{
 							jsondata.Personal.map((person) => {
 								return (
 									<option value="{person.Efternamn}">{person.Förnamn + " " + person.Efternamn}</option>
 								);	
 							})
-						}
+            }
 					</select>
 				)
 			}
