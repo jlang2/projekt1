@@ -7,7 +7,6 @@
         <script src="https://unpkg.com/react-dom@16.9.0/umd/react-dom.development.js"></script>
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 	<script src="resurs.js"></script>
-	<link rel ="stylesheet" href = "style.css"/>
 </head>
 <body onload="filterOptions()">
 	<div id="root"></div>
@@ -43,7 +42,6 @@
 	<script type="text/babel">
 
   
-	function Courses() {
 		function Courses() {
 			return (
 				<select id="courseSelect" name="courseSelect">
@@ -95,7 +93,7 @@
 			)
 		}
 
-            	ReactDOM.render(       //(komponent,hook), reactDOM är virtuell, render metoden skapar "riktiga" DOM
+            	ReactDOM.render(     
 		<div id="rows-parent">
 	      	<Categories />
 	      	<Personal />
@@ -103,7 +101,7 @@
 	      	<Hours />
       		<Send />
 		</div>,                                                        
-                document.getElementById("root")     //en div som heter root är typiskt react
+                document.getElementById("root")    
             );
 	</script>
 <!--table för att sortera shittii-->
