@@ -1,5 +1,7 @@
+html{
+  background-image: linear-gradient(0deg, yellow,  salmon);
+}
 body {
-  background-color:salmon;
   margin: 4em;
 }
 section {
