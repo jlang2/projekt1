@@ -6,9 +6,12 @@
 	<script src="https://unpkg.com/react@16.9.0/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16.9.0/umd/react-dom.development.js"></script>
 	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-	<script src="resurs.js"></script>
-	<link rel="stylesheet" href="style.css" type="text/css" charset="utf-8">
+  <script src="resurs.js"></script>
+  <link rel ="stylesheet" href = "style.css"/>
 </head>
+
+
+
 <body onload="filterOptions()">
 	<div id="root"></div>
 	<script charset="utf-8">
@@ -46,18 +49,26 @@
 		function Courses() {
 			return (
 				<select id="courseSelect" name="courseSelect">
-				<option value="default">Välj Kurs</option>
-				<option value="IT-Bachelor">kurs1</option>
-				<option value="IT-Bachelor">kurs2</option>
-				<option value="BDA">kurs3</option>
-				<option value="BDA">kurs4</option>
-				<option value="BDA">kurs5</option>
 				</select>
 			)
 	}
+  class Kurser extends React.Component { // bachelor
+			render() {
+				return (
+					<select>
+						{
+							jsondata.Program.IA.Kurser.map((kurs) => {
+								return (
+									<option value="{kurs.Kurser}">{kurs.namn + " " + kurs.kurskod}</option>
+								);	
+							})
+            }
+					</select>
+				)
+			}
+		}
 
-
-		class Personal extends React.Component {
+		class Personal extends React.Component { // bachelor
 			render() {
 				return (
 					<select>
@@ -72,11 +83,47 @@
 				)
 			}
 		}
+		class PersonalBDA extends React.Component {  //BDA
+			render() {
+				return (
+					<select id="personalbda">
+						{
+							jsondata.Personal.map((person) => {
+								return (
+									<option value="{person.Efternamn}">{person.Förnamn + " " + person.Efternamn}</option>
+								);	
+							})
+            }
+					</select>
+				)
+			}
+		}
+		class KurserBDA extends React.Component { // bachelor
+			render() {
+				return (
+					<select id="kurserbda">
+						{
+							jsondata.Program.BDA.Kurser.map((kurs) => {
+								return (
+									<option value="{kurs.Kurser}">{kurs.namn + " " + kurs.kurskod}</option>
+								);	
+							})
+            }
+					</select>
+				)
+			}
+		}
+		function BDA() {
+			return (
+				<select id="category2" name="category2">
+					<option value ="BDA">BDA</option>
+					</select>
+			)
+		}
 
 		function Categories() {
 			return (
 				<select id="category" name="category">
-				<option value="BDA">BDA</option>
 				<option value="IT-Bachelor">IT-Bachelor</option>
 				</select>
 			)
@@ -87,25 +134,46 @@
 				<input type="text" name="hours" id="hours" placeholder="Timantal" defaultValue=""></input>
 			)
 		}
+		function Hoursbda() {
+			return (
+				<input type="text" name="hours" id="hoursbda" placeholder="Timantal" defaultValue=""></input>
+			)
+		}
 
 		function Send() {
 			return (
 				<input type="submit" name="submit" id="submit" value="Skicka"></input>
 			)
 		}
+		function Sendbda() {
+			return (
+				<input type="submit" name="submit" id="submitbda" value="Skicka"></input>
+			)
+		}
 
             	ReactDOM.render(     
 		<div id="rows-parent">
+			
 	      	<Categories />
 	      	<Personal />
-	      	<Courses />
+	      	<Kurser />
 	      	<Hours />
-      		<Send />
+			<Send />
+
+			<BDA />
+			<PersonalBDA />
+			<KurserBDA />
+			<Hoursbda />
+			<Sendbda />
 		</div>,                                                        
                 document.getElementById("root")    
             );
-	</script>
-<!--table för att sortera shittii-->
+  </script>
+ 
+
+
+
+
 <table id="idtable" style="width:100%">
 
     <tr id="tr1">
@@ -118,6 +186,9 @@
       
     </tr>
 
+    <tr>
+      <td>1</td>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -190,5 +261,6 @@
 
   </table>
   <br>
+
 </body>
 </html>
