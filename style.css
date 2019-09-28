@@ -108,3 +108,9 @@ th#p4 {
 #root {
   padding-top: 15px;
 }
+#rows-parent{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-row-gap: 1em;
+  padding: 10px;
+}
