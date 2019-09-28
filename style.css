@@ -1,5 +1,6 @@
 html {
   height: 100%;
+  background-color: rgba(251, 195, 90, 0.5);
 }
 body {
   margin:2em;
@@ -37,11 +38,14 @@ table, th, td {
 }
 th, td {
   text-align: left;
+  padding: 10px;
 }
 table#t01 {
   width: 100%;    
   background-color: #f1f1c1;
 }
+tr:nth-child(even) {background-color: #fad59a85;}
+tr:hover {background-color: #ffd2a8;}
 /*BLOCK FÄRGER*/
 th#nmr1{
   border-style: solid;
@@ -50,27 +54,22 @@ th#nmr1{
 th#k1 {
   border-style: solid;
 }
-
 th#p1 {
   background-color:blue;
-  
 }
 th#p2 {
   background-color:red;
 }
 th#p3 {
   background-color:orange;
-  
 }
 th#p4 {
   background-color:yellow;
-  
 }
 #idtable{
   position:relative;
   top: 40px;
 }
- 
 /*DROP DOWN MENY*/
 .dropbtn {
   background-color: #3498DB;
@@ -79,17 +78,14 @@ th#p4 {
   font-size: 16px;
   border: none;
   cursor: pointer;
-}
-  
+} 
 .dropbtn:hover, .dropbtn:focus {
   background-color: #2980B9;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
