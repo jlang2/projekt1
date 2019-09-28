@@ -1,5 +1,7 @@
 html{
-  background-image: linear-gradient(0deg, yellow,  salmon);
+  background-image: linear-gradient(-90deg, yellow,  salmon);
+  width: 100%;
+  height: 100%;
 }
 body {
   margin: 4em;
