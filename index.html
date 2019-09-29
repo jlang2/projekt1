@@ -13,7 +13,7 @@
 	<div id="root"></div>
 	<script charset="utf-8">
 	
-	function filterOptions() {
+	/*function filterOptions() {
 		
 		var categorySelect = document.getElementById("category");
 		categorySelect.addEventListener("change", filterOptions);
@@ -37,25 +37,72 @@
 				}
 			}
 		}
-	}
+	}*/
 	</script>
 	
 	<script type="text/babel">
 
-  
-		function Courses() {
-			return (
-				<select id="courseSelect" name="courseSelect">
-				<option value="default">Välj Kurs</option>
-				<option value="IT-Bachelor">kurs1</option>
-				<option value="IT-Bachelor">kurs2</option>
-				<option value="BDA">kurs3</option>
-				<option value="BDA">kurs4</option>
-				<option value="BDA">kurs5</option>
-				</select>
-			)
-	}
+  	class SelectContainer extends React.Component {
 
+		  constructor() {
+			super()
+			this.state = {
+				isHidden: true
+			}
+		  }
+
+		  toggleHidden() {
+			this.setState({
+				isHidden: !this.state.isHidden
+			})
+		  }
+
+		  render() {
+			  return (
+				<div>
+					<select id="category" name="category" onChange={this.toggleHidden.bind(this)}>
+					<option value="BDA">BDA</option>
+					<option value="IT-Bachelor">IT-Bachelor</option>
+					</select>
+					{this.state.isHidden && <BDAKurser />}
+					{!this.state.isHidden && <IAKurser />}
+				</div>
+			  )
+		  }
+	  }
+		
+
+		class BDAKurser extends React.Component {
+			render() {
+				return (
+					<select>
+						{
+							jsondata.Program.BDA.Kurser.map((bdakurser) => {
+								return (
+									<option value="{bdakurser.namn}">{bdakurser.namn}</option>
+								);
+							})
+						}
+					</select>
+				);
+			}
+		}
+
+		class IAKurser extends React.Component {
+			render() {
+				return (
+					<select>
+						{
+							jsondata.Program.IA.Kurser.map((iakurser) =>  {
+								return (
+									<option value="{iakurser.namn}">{iakurser.namn}</option>
+								);
+							})
+						}
+					</select>
+				);
+			}
+		}
 
 		class Personal extends React.Component {
 			render() {
@@ -67,9 +114,9 @@
 									<option value="{person.Efternamn}">{person.Förnamn + " " + person.Efternamn}</option>
 								);	
 							})
-            }
+           					 }
 					</select>
-				)
+				);
 			}
 		}
 
@@ -94,13 +141,28 @@
 			)
 		}
 
+		function Table() {
+			return (
+				<table id="idtable"> 
+					<tr id="tr1">
+						<th id="nmr1">#</th>      
+						<th id="k1">Kurser/Forskning</th>
+						<th id="p1">P1</th> 
+      						<th id="p2">P2</th>
+      						<th id ="p3">P3</th>
+      						<th id="p4">P4</th>
+    					</tr>
+				</table>
+			)
+		}
+
             	ReactDOM.render(     
 		<div id="rows-parent">
-	      	<Categories />
+	      	<SelectContainer />
 	      	<Personal />
-	      	<Courses />
 	      	<Hours />
       		<Send />
+		<Table />
 		</div>,                                                        
                 document.getElementById("root")    
             );
