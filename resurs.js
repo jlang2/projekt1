@@ -347,6 +347,12 @@
                     "kurskod": "BD-2-015 (0)",
                     "timmar": 100,
                     "period": 1
+                },
+                {
+                    "namn": "P4TEST",
+                    "kurskod": "YEET-2-015 (0)",
+                    "timmar": 100,
+                    "period": 4
                 }
             ]
         }

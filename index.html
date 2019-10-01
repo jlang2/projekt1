@@ -51,7 +51,7 @@
 						{
 							jsondata.Program.BDA.Kurser.map((bdakurser) => {
 								return (
-									<option value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar}>{bdakurser.namn}</option>
+									<option value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn}</option>
 								);
 							})
 						}
@@ -66,7 +66,7 @@
 						{
 							jsondata.Program.IA.Kurser.map((iakurser) =>  {
 								return (
-									<option value={iakurser.namn + "+" + iakurser.kurskod + "+" + iakurser.timmar}>{iakurser.namn}</option>
+									<option value={iakurser.namn + "+" + iakurser.kurskod + "+" + iakurser.timmar + "+" + iakurser.period }>{iakurser.namn}</option>
 								);
 							})
 						}
@@ -117,7 +117,8 @@
 						Lektor: personalSelect.value,
 						Kurs: kursArray[0],
 						Kurskod: kursArray[1],
-						Timmar: kursArray[2]
+						Timmar: kursArray[2],
+						Period: kursArray[3]
 						
 					}];
 				} else {
@@ -125,7 +126,8 @@
 						Lektor: personalSelect.value,
 						Kurs: kursArray[0],
 						Kurskod: kursArray[1],
-						Timmar: kursArray[2]
+						Timmar: kursArray[2],
+						Period: kursArray[3]
 					})
 				}
 			}
@@ -147,7 +149,9 @@
 				return (
 						
 							jsondata.active.map((x) => {
+								if(x.Period == 1){
 								return (
+									
 									<tr>
 									<td>{x.Lektor}</td>
 									<td>{x.Kurs + " " + x.Kurskod}</td>
@@ -156,13 +160,51 @@
 									<td></td>
 									<td></td>
 									</tr>
-									
-								);	
+									);
+								}
+								if (x.Period == 2){
+									return (	
+								<tr>
+									<td>{x.Lektor}</td>
+									<td>{x.Kurs + " " + x.Kurskod}</td>
+									<td></td>
+									<td>{x.Timmar}</td>
+									<td></td>
+									<td></td>
+									</tr>
+									);
+								}
+								if (x.Period == 3){
+									return (	
+								<tr>
+									<td>{x.Lektor}</td>
+									<td>{x.Kurs + " " + x.Kurskod}</td>
+									<td></td>
+									<td></td>
+									<td>{x.Timmar}</td>
+									<td></td>
+									</tr>
+									);
+								}
+								else{
+									return (	
+								<tr>
+									<td>{x.Lektor}</td>
+									<td>{x.Kurs + " " + x.Kurskod}</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>{x.Timmar}</td>
+									</tr>
+									);
+								}
+
 							})
 						
 				)
 			}
 		}
+		
 		class Table extends React.Component {
 			constructor(props) {
 				super(props)
