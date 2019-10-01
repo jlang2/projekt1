@@ -154,19 +154,18 @@
 		class TableData extends React.Component {
 			render () {
 				return (
-					<tr>
-						{
+						
 							jsondata.active.map((x) => {
 								return (
-									<span>
+									<tr>
 									<td></td>
 									<td>{x.Kurs + " " + x.Kurskod}</td>
 									<td>{x.Lektor}</td>
-									</span>
+									</tr>
+									
 								);	
 							})
-						}
-					</tr>
+						
 				)
 			}
 		}
