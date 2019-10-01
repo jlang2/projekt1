@@ -9,10 +9,16 @@
 	<script src="resurs.js"></script>
 	<link rel="stylesheet" href="style.css" type="text/css" charset="utf-8">
 </head>
-<body onload="filterOptions()">
+<body>
 	<div id="root"></div>
 	
 	<script type="text/babel">
+
+	function updateState(isUndefined) {
+		console.log("funkar");
+		isUndefined = true;
+		this.setState({isUndefined});
+	}
 
   	class SelectContainer extends React.Component {
 
@@ -47,11 +53,11 @@
 		class BDAKurser extends React.Component {
 			render() {
 				return (
-					<select>
+					<select id="kurserSelect">
 						{
 							jsondata.Program.BDA.Kurser.map((bdakurser) => {
 								return (
-									<option value="{bdakurser.namn}">{bdakurser.namn}</option>
+									<option value={bdakurser.namn + "+" + bdakurser.kurskod}>{bdakurser.namn}</option>
 								);
 							})
 						}
@@ -63,11 +69,11 @@
 		class IAKurser extends React.Component {
 			render() {
 				return (
-					<select>
+					<select id="kurserSelect">
 						{
 							jsondata.Program.IA.Kurser.map((iakurser) =>  {
 								return (
-									<option value="{iakurser.namn}">{iakurser.namn}</option>
+									<option value={iakurser.namn + "+" + iakurser.kurskod}>{iakurser.namn}</option>
 								);
 							})
 						}
@@ -79,11 +85,11 @@
 		class Personal extends React.Component {
 			render() {
 				return (
-					<select>
+					<select id="personalSelect">
 						{
 							jsondata.Personal.map((person) => {
 								return (
-									<option value="{person.Efternamn}">{person.Förnamn + " " + person.Efternamn}</option>
+									<option value={person.Förnamn + " " + person.Efternamn}>{person.Förnamn + " " + person.Efternamn}</option>
 								);	
 							})
            					 }
@@ -107,34 +113,110 @@
 			)
 		}
 
-		function Send() {
-			return (
-				<input type="submit" name="submit" id="submit" value="Skicka"></input>
-			)
+		class Send extends React.Component {
+
+			constructor() {
+				super();
+				this.dataToJson = this.dataToJson.bind(this);
+				jsondata.active = new Object();
+			}
+			
+
+			dataToJson() {
+				const kursArray = kurserSelect.value.split("+");
+				if(jsondata.active[0] == undefined) {
+					jsondata.active = [{
+						Lektor: personalSelect.value,
+						Kurs: kursArray[0],
+						Kurskod: kursArray[1]
+					}];
+				} else {
+					jsondata.active.push({
+						Lektor: personalSelect.value,
+						Kurs: kursArray[0],
+						Kurskod: kursArray[1]
+					})
+				}
+			}
+
+			wrapperFunction = () => {
+				this.dataToJson();
+				updateState();
+			}
+			
+			render () {
+				return (
+					<input type="button" name="button" id="button" onClick={this.wrapperFunction} value="Skicka"></input>
+				)
+			}
 		}
 
-		function Table() {
-			return (
-				<table id="idtable"> 
-					<tr id="tr1">
-						<th id="nmr1">#</th>      
-						<th id="k1">Kurser/Forskning</th>
-						<th id="p1">P1</th> 
-      						<th id="p2">P2</th>
-      						<th id ="p3">P3</th>
-      						<th id="p4">P4</th>
-    					</tr>
-				</table>
-			)
+		class TableData extends React.Component {
+			render () {
+				return (
+					<tr>
+						{
+							jsondata.active.map((x) => {
+								return (
+									<span>
+									<td></td>
+									<td>{x.Kurs + " " + x.Kurskod}</td>
+									<td>{x.Lektor}</td>
+									</span>
+								);	
+							})
+						}
+					</tr>
+				)
+			}
+		}
+
+		class Table extends React.Component {
+
+			constructor(props) {
+				super(props)
+				this.state = {
+					isUndefined: false
+				}
+				updateState = updateState.bind(this)
+			}
+
+
+			render () {
+				return (
+					<table id="idtable"> 
+						<tr id="tr1">
+							<th id="nmr1">#</th>      
+							<th id="k1">Kurser/Forskning</th>
+							<th id="p1">P1</th> 
+								<th id="p2">P2</th>
+								<th id ="p3">P3</th>
+								<th id="p4">P4</th>
+						</tr>
+						{this.state.isUndefined && <TableData />}
+						
+					</table>
+				)
+			}
+		}
+
+		class Container extends React.Component {
+			render () {
+				return (
+					<div>
+						<Table />
+						<Send />
+					</div>
+				)
+			}
 		}
 
             	ReactDOM.render(     
 		<div id="rows-parent">
 	      	<SelectContainer />
 	      	<Personal />
-	      	<Hours />
-      		<Send />
-		<Table />
+			<Hours />
+			<Container />  
 		</div>,                                                        
                 document.getElementById("root")    
             );
