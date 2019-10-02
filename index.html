@@ -141,16 +141,16 @@
 					for(let i = 0; i < jsondata.active.length; i++) {
 						if(jsondata.active[i].Kurs == kursArray[0]) {
 							alert("Någon har redan valt denna kurs.");
-						} else {
-							jsondata.active.push({
-								Lektor: personalSelect.value,
-								Kurs: kursArray[0],
-								Kurskod: kursArray[1],
-								Timmar: kursArray[2],
-								Period: kursArray[3]
-							});
+							return;
 						}
 					}
+					jsondata.active.push({
+						Lektor: personalSelect.value,
+						Kurs: kursArray[0],
+						Kurskod: kursArray[1],
+						Timmar: kursArray[2],
+						Period: kursArray[3]
+						});
 				}
 		var jsonDataText = JSON.stringify(jsondata);
 		localStorage.setItem("jsondata", jsonDataText);
