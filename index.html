@@ -198,24 +198,21 @@
 					Period: kursArray[3]
 				});
 			}
-			}
-				var jsonDataText = JSON.stringify(jsondata);
-				localStorage.setItem("jsondata", jsonDataText);
-			}
-			wrapperFunction = () => {
-				this.dataToJson();
-				updateState();
-				
-			}
-			
-			render () {
-				return (
-					<input type="button" name="button" id="button" onClick={this.wrapperFunction} value="Skicka"></input>
-				)
-			}
-			jsonDataText = JSON.stringify(jsondata);
+			var jsonDataText = JSON.stringify(jsondata);
 			localStorage.setItem("jsondata", jsonDataText);
 		}
+
+		wrapperFunction = () => {
+			this.dataToJson();
+			updateState();	
+		}
+			
+		render () {
+			return (
+				<input type="button" name="button" id="button" onClick={this.wrapperFunction} value="Skicka"></input>
+			)
+		}
+		
 		wrapperFunction = () => {
 			this.dataToJson();
 			updateState();
