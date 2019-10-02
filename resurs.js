@@ -353,6 +353,24 @@
                     "kurskod": "YEET-2-015 (0)",
                     "timmar": 100,
                     "period": 4
+                },
+                {
+                    "namn": "P3TEST",
+                    "kurskod": "YEET-2-015 (0)",
+                    "timmar": 100,
+                    "period": 3
+                },
+                {
+                    "namn": "P2TEST",
+                    "kurskod": "YEET-2-015 (0)",
+                    "timmar": 100,
+                    "period": 2
+                },
+                {
+                    "namn": "P1TEST",
+                    "kurskod": "YEET-2-015 (0)",
+                    "timmar": 100,
+                    "period": 1
                 }
             ]
         }
