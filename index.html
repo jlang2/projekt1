@@ -1,242 +1,308 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Project 1</title>
-        <script src="https://unpkg.com/react@16.9.0/umd/react.development.js"></script>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="https://unpkg.com/react@16.9.0/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16.9.0/umd/react-dom.development.js"></script>
-        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-        <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-    </head>
-    <body>
-        <!--<div id="demo">Ursprungliga text</div>
-        <script type="text/babel">
-            function Welcome(props) {
-                return <div><h1>Hello {props.name}!</h1></div>;
-            }
-            function App(){
-                return (
-                    <div>
-                        <Welcome name="Sebastian" />
-                        <Welcome name="Skurk" />
-                    </div>
-                );
-            }
-            ReactDOM.render(                                                        //(komponent,hook), reactDOM är virtuell, render metoden skapar "riktiga" DOM
-                <App />,                                                        
-                document.getElementById("demo")                                     //en div sim heter root är tyypiskt react
-            );
-        </script>-->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script src="resurs.js"></script>
+	<link rel="stylesheet" href="style.css" type="text/css" charset="utf-8">
+</head>
+<body>
+	<div id="root"></div>
+  
+  <script type="text/babel">
+  
+	function updateState(isUndefined) {
+		console.log("funkar");
+		  isUndefined = true;
+        this.setState({isUndefined});
+    
 
-<!--DROP DOWN MENY-->
+	}
+  	class SelectContainer extends React.Component {
+		  constructor() {
+			super()
+			this.state = {
+        isHidden: true,
+			}
+		}
+		  toggleHidden() {
+			this.setState({
+        isHidden: !this.state.isHidden
 
-<h1>Projekt 1 Demo</h1>
 
-<!--<div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="#si">si</a>
-    <a href="#dig">dig</a>
-    <a href="#iröven">iröven</a>
-  </div>
-</div>
+			})
+    }
 
-SCRIPT FÖR DROPDOWN MENY-->
-<!--<script>
-        /* When the user clicks on the button, 
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
+
+		  render() {
+			  return (
+        <div>
+
+          <select id="category" name="category" onChange={this.toggleHidden.bind(this)}>
+				    	<option value="BDA">BDA</option>
+              <option value="IT-Bachelor">IT-Bachelor</option>
+					</select>
+              {this.state.isHidden && <BDAKurser />}
+              {!this.state.isHidden && <IAKurser />}   
         
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-          if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-              var openDropdown = dropdowns[i];
-              if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-              }
-            }
-          }
-        }
-        </script>
-      -->
-      <body onload="filterOptions()">
-        <div id="root"></div>
-        <script charset="utf-8">
-          
-        function filterOptions() {
-          
-          var categorySelect = document.getElementById("category");
-          categorySelect.addEventListener("change", filterOptions);
-          var courseSelect = document.getElementById("courseSelect");
-          courseSelect.value = "default";
-          if(categorySelect.value == "BDA") {
-            for(var i = 0; i < courseSelect.length; i++) {
-              if(courseSelect.children[i].value == "BDA") {
-                courseSelect.children[i].style.display = "block";
-              } else if(courseSelect.children[i].value == "IT-Bachelor") {
-                courseSelect.children[i].style.display = "none";
-              }
-            }
-          } else if(categorySelect.value == "IT-Bachelor") {
-            for(var i = 0; i < courseSelect.length; i++) {
-              if(courseSelect.children[i].value == "IT-Bachelor") {
-                courseSelect.children[i].style.display = "block";
-              } else if(courseSelect.children[i].value == "BDA") {
-                courseSelect.children[i].style.display = "none";
-              }
-            }
-          }
-        }
-        </script>
-        
-        <script type="text/babel">
-          
-                    function App(){
-                        return (
-              <div id="dropdowndiv">
-              <select id="teachers" name="teachers">
-                <option value="teacher1">teacher1</option>
-                <option value="teacher2">teacher2</option>
-              </select>
-              <select id="category" name="category">
-                <option value="BDA">BDA</option>
-                <option value="IT-Bachelor">IT-Bachelor</option>
-              </select>
-              <select id="courseSelect" name="courseSelect">
-                <option value="default">Välj Kurs</option>
-                <option value="IT-Bachelor">kurs1</option>
-                <option value="IT-Bachelor">kurs2</option>
-                <option value="BDA">kurs3</option>
-                <option value="BDA">kurs4</option>
-                <option value="BDA">kurs5</option>
-              </select>
-              <input type="text" name="hours" id="hours" placeholder="Timantal" defaultValue=""></input>
-              <input type="submit" name="submit" id="submit" value="Skicka"></input>
-              </div>
-                        );
+          </div>
+			  )
+		  }
+    }
+    
+		class BDAKurser extends React.Component {
+			render() {
+				return (
+					<select id="kurserSelect">
+						{
+							jsondata.Program.BDA.Kurser.map((bdakurser) => {
+								return (
+									<option value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn}</option>
+								);
+							})
+						}
+					</select>
+				);
+			}
+    }
+ 
+
+		class IAKurser extends React.Component {
+			render() {
+				return (
+					<select id="kurserSelect">
+						{
+							jsondata.Program.IA.Kurser.map((iakurser) =>  {
+								return (
+									<option value={iakurser.namn + "+" + iakurser.kurskod + "+" + iakurser.timmar + "+" + iakurser.period }>{iakurser.namn}</option>
+								);
+							})
+						}
+					</select>
+				);
+			}
+    }
+
+		class Personal extends React.Component {
+			render() {
+				return (
+					<select id="personalSelect">
+						{
+							jsondata.Personal.map((person) => {
+								return (
+									<option value={person.Förnamn + " " + person.Efternamn}>{person.Förnamn + " " + person.Efternamn}</option>
+								);	
+							})
+           	}
+					</select>
+				);
+			}
+    }
+
+
+    class Forskning extends React.Component {
+			render() {
+				return (
+					<select id="forskkkSelect"><option value=" ">Forskning</option>
+						{
+              jsondata.Program.BDA.Kurser.map((knamn) => {
+								return (
+									<option value={knamn.namn + " " + knamn.kurskod + " " + knamn.timmar}>{knamn.namn + " " + knamn.kurskod}</option>
+								);
+							})
                     }
-                    ReactDOM.render(       //(komponent,hook), reactDOM är virtuell, render metoden skapar "riktiga" DOM
-                      <App />,                                                        
-                      document.getElementById("root")     //en div sim heter root är tyypiskt react
+                    {
+              jsondata.Program.IA.Kurser.map((knamn) => {
+								return (
+									<option value={knamn.namn + " " + knamn.kurskod + " " + knamn.timmar}>{knamn.namn + " " + knamn.kurskod}</option>
+								);
+							})
+                    }        
+					</select>
+				);
+			}
+    }
+    
+    
+
+		function Hours() {
+			return (
+				<input type="text" name="hours" id="hours" placeholder="Timantal" defaultValue=""></input>
+			)
+    }
+ 
+		class Send extends React.Component {
+			constructor() {
+				super();
+				this.dataToJson = this.dataToJson.bind(this);
+				jsondata.active = new Object();
+      }
+
+
+
+			
+			dataToJson() {
+				const kursArray = kurserSelect.value.split("+");
+				if(jsondata.active[0] == undefined) {
+					jsondata.active = [{
+            Lektor: personalSelect.value,
+            Forskning: forskkkSelect.value,
+            Kurs: kursArray[0],
+						Kurskod: kursArray[1],
+						Timmar: kursArray[2],
+            Period: kursArray[3]
+
+            
+						
+					}];
+        }
+        else {
+					jsondata.active.push({
+            Lektor: personalSelect.value,
+            Forskning: forskkkSelect.value,
+            Kurs: kursArray[0],
+						Kurskod: kursArray[1],
+						Timmar: kursArray[2],
+            Period: kursArray[3]
+
+            
+					})
+        }
+     
+      }			
+          
+			wrapperFunction = () => {
+				this.dataToJson();
+				updateState();
+			}
+			
+			render () {
+				return (
+					<input type="button" name="button" id="button" onClick={this.wrapperFunction} value="Skicka"></input>
+				)
+			}
+    }
+
+
+    
+		class TableData extends React.Component {
+   
+			render () {
+				return (						
+							jsondata.active.map((x) => {              
+								if (x.Period == 1){
+
+								return (
+									
+									<tr>
+									<td>{x.Lektor}</td>
+									<td>{x.Kurs + " " + x.Kurskod}</td>
+                  <td>{x.Forskning}</td>
+									<td>{x.Timmar}</td>                  
+									<td></td>
+									<td></td>
+									</tr>
                   );
-        </script>
 
-<!--table för att sortera shittii-->
-<table id="idtable" style="width:100%">
+                }              								
+								if (x.Period == 2){
+									return (	
+								          <tr>
+									          <td>{x.Lektor}</td>
+									          <td>{x.Kurs + " " + x.Kurskod}</td>
+									          <td>{x.Forskning}</td>
+                            <td></td>
+                            <td>{x.Timmar}</td>
+									          <td></td>
+								            </tr>
+									);
+                }
+                
+								if (x.Period == 3){
+									return (	
+								          <tr>
+									          <td>{x.Lektor}</td>
+									          <td>{x.Kurs + " " + x.Kurskod}</td>
+									          <td>{x.Forskning}</td>
+									          <td></td>
+                            <td></td>
+                            <td>{x.Timmar}</td>
+									          </tr>
+									);
+								}
+								else{
+									return (	
+								          <tr>
+									          <td>{x.Lektor}</td>
+									          <td>{x.Kurs + " " + x.Kurskod}</td>
+									          <td>{x.Forskning}</td>
+									          <td></td>
+                            <td></td>
+                            <td></td>
+									          <td>{x.Timmar}</td>
+									          </tr>
+									        );
+								      }
+		            })
+						
+				        )
+			        }
+            }
+   
+		// kurser
+		class Table extends React.Component {
+			constructor(props) {
+				super(props)
+				  this.state = {
+					  isUndefined: false
+				}
+				  updateState = updateState.bind(this)
+			}
+			render () {
+				return (
+					<table id="idtable"> 
+						<tr id="tr1">
+							<th id="lektor">Lektor</th>   							   
+              <th id="k1">Kurser</th>
+              <th id="kf">Forskning</th>
+							<th id="p1">P1</th> 
+							<th id="p2">P2</th>
+							<th id ="p3">P3</th>
+              <th id="p4">P4</th>
+            </tr>            
+						{this.state.isUndefined && <TableData />}						
+					</table>
+				)
+			}
+    }
+    
+   
+		class Container extends React.Component {
+			render () {
+				    return (
+					          <div>
+						          <Table />
+                      <Send />
+					          </div>
+				            )
+			          }
+		  }
+    ReactDOM.render(     
+		  <div id="idtable">
+          <SelectContainer />
+          <Personal />
+          <Forskning />
+          <Hours />
+		    	<Container />  
+		  </div>,                                                        
+                document.getElementById("root")    
+            );
 
-    <tr id="tr1">
-      <th id="nmr1">#</th>      
-      <th id="k1">Kurser/Forskning</th>
-      <th id="p1">P1</th> 
-      <th id="p2">P2</th>
-      <th id ="p3">P3</th>
-      <th id="p4">P4</th>
-      
-    </tr>
 
-    <tr>
-      <td>1</td>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <td></td>
-      
-    </tr>
-
-    <tr>
-      <td>2</td>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <td></td>
-      
-    </tr>
-
-    <tr>
-      <td>3</td>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <td></td>
-      
-    </tr>
-
-    <tr>
-      <td>4</td>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <td></td>
-      
-    </tr>
-
-    <tr>
-        <td>5</td>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <td></td>
-        
-    </tr>
-
-    <tr>
-        <td>6</td>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <td></td>
-        
-    </tr>
-
-    <tr>
-        <td>7</td>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <td></td>
-        
-    </tr>
-
-
-
-
-  </table>
+</script>
   <br>
-
-  <!--
-  <table id="t01">
-    <tr>
-      <th>Firstname</th>
-      <th>Lastname</th> 
-      <th>Age</th>
-    </tr>
-    <tr>
-      <td>Jill</td>
-      <td>Smith</td>
-      <td>50</td>
-    </tr>
-    <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Doe</td>
-      <td>80</td>
-    </tr>
-  </table>
--->
-    </body>
+</body>
 </html>
