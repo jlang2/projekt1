@@ -155,10 +155,10 @@
 				
 			}
 			
-			render () {
+			render() {
 				return (
 					<input type="button" name="button" id="button" onClick={this.wrapperFunction} value="Skicka"></input>
-				)
+				);
 			}
     }
 
@@ -171,6 +171,7 @@
 				jsonDataText = localStorage.getItem("jsondata");
 				jsondata = JSON.parse(jsonDataText);
 			}
+		}
 			render () {
 				return (
 					jsondata.active.map((x) => {
