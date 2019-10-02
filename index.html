@@ -13,6 +13,8 @@
 	<div id="root"></div>
 	
 	<script type="text/babel">
+	let jsonDataText;
+
 	function updateState(isUndefined) {
 		console.log("funkar");
 		isUndefined = true;
@@ -45,6 +47,14 @@
 	  }
 		
 		class BDAKurser extends React.Component {
+			constructor() {
+				super()
+				if (localStorage.getItem("jsondata") != null) {
+					jsonDataText = localStorage.getItem("jsondata");
+					jsondata = JSON.parse(jsonDataText);
+				}
+			}
+
 			render() {
 				return (
 					<select id="kurserSelect">
@@ -60,6 +70,13 @@
 			}
 		}
 		class IAKurser extends React.Component {
+			constructor() {
+				super()
+				if (localStorage.getItem("jsondata") != null) {
+					jsonDataText = localStorage.getItem("jsondata");
+					jsondata = JSON.parse(jsonDataText);
+				}
+			}
 			render() {
 				return (
 					<select id="kurserSelect">
@@ -75,6 +92,13 @@
 			}
 		}
 		class Personal extends React.Component {
+			constructor() {
+				super()
+				if (localStorage.getItem("jsondata") != null) {
+					jsonDataText = localStorage.getItem("jsondata");
+					jsondata = JSON.parse(jsonDataText);
+				}
+			}
 			render() {
 				return (
 					<select id="personalSelect">
@@ -113,7 +137,6 @@
 			constructor() {
 				super();
 				this.dataToJson = this.dataToJson.bind(this);
-				jsondata.active = new Object();
 			}
 			
 			dataToJson() {
@@ -136,6 +159,8 @@
 						Period: kursArray[3]
 					})
 				}
+				var jsonDataText = JSON.stringify(jsondata);
+				localStorage.setItem("jsondata", jsonDataText);
 			}
 			wrapperFunction = () => {
 				this.dataToJson();
@@ -150,9 +175,15 @@
 									
 		}
 		class TableData extends React.Component {
+			constructor() {
+				super()
+				if (localStorage.getItem("jsondata") != null) {
+					jsonDataText = localStorage.getItem("jsondata");
+					jsondata = JSON.parse(jsonDataText);
+				}
+			}
 			render () {
 				return (
-						
 							jsondata.active.map((x) => {
 								if(x.Kurs == "Forskning"){
 								return (									
@@ -225,9 +256,21 @@
 		class Table extends React.Component {
 			constructor(props) {
 				super(props)
-				this.state = {
-					isUndefined: false
+				if (localStorage.getItem("jsondata") != null) {
+					jsonDataText = localStorage.getItem("jsondata");
+					jsondata = JSON.parse(jsonDataText);
+				} else {
+					jsondata.active = new Object();
 				}
+				if(jsondata.active[0] == undefined) {
+						this.state = {
+						isUndefined: false
+						}
+					} else {
+						this.state = {
+						isUndefined: true
+						}
+					}
 				updateState = updateState.bind(this)
 			}
 			render () {
@@ -257,14 +300,14 @@
 				)
 			}
 		}
-            	ReactDOM.render(     
-		<div id="idtable">
-	      	<SelectContainer />
-	      	<Personal />
-			<Hours />
-			<Container />
-			<Remove />  
-		</div>,                                                        
+        ReactDOM.render(     
+			<div id="idtable">
+				<SelectContainer />
+				<Personal />
+				<Hours />
+				<Container />
+				<Remove />  
+			</div>,                                                        
                 document.getElementById("root")    
             );
 	</script>
