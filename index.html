@@ -103,6 +103,12 @@
 				<input type="text" name="hours" id="hours" placeholder="Timantal" defaultValue=""></input>
 			)
 		}
+		function Remove(){
+			return (
+					<input type="button" name="removeButton" id="removeButton" value="Radera"></input>
+					
+				)	
+		}
 		class Send extends React.Component {
 			constructor() {
 				super();
@@ -131,27 +137,37 @@
 					})
 				}
 			}
-
-
 			wrapperFunction = () => {
 				this.dataToJson();
 				updateState();
 			}
-			
 			render () {
 				return (
 					<input type="button" name="button" id="button" onClick={this.wrapperFunction} value="Skicka"></input>
+					
 				)
 			}
+									
 		}
 		class TableData extends React.Component {
 			render () {
 				return (
 						
 							jsondata.active.map((x) => {
+								if(x.Kurs == "Forskning"){
+								return (									
+									<tr>
+									<td>{x.Lektor}</td>
+									<td>{x.Kurs + " " + x.Kurskod}</td>
+									<td>0</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									</tr>
+									);
+								}
 								if(x.Period == 1){
-								return (
-									
+								return (									
 									<tr>
 									<td>{x.Lektor}</td>
 									<td>{x.Kurs + " " + x.Kurskod}</td>
@@ -186,6 +202,7 @@
 									</tr>
 									);
 								}
+								
 								else{
 									return (	
 								<tr>
@@ -245,7 +262,8 @@
 	      	<SelectContainer />
 	      	<Personal />
 			<Hours />
-			<Container />  
+			<Container />
+			<Remove />  
 		</div>,                                                        
                 document.getElementById("root")    
             );
