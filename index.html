@@ -129,31 +129,37 @@
 		
 		dataToJson() {
 			const kursArray = kurserSelect.value.split("+");
-			if(jsondata.active[0] == undefined) {
-				jsondata.active = [{
-					Lektor: personalSelect.value,            
-					Kurs: kursArray[0],
-					Kurskod: kursArray[1],
-					Timmar: kursArray[2],
-					Period: kursArray[3]           						
-					}];
-        } else {
-				jsondata.active.push({
-					Lektor: personalSelect.value,
-					Kurs: kursArray[0],
-					Kurskod: kursArray[1],
-					Timmar: kursArray[2],
-					Period: kursArray[3]
-				});
-			}
-				var jsonDataText = JSON.stringify(jsondata);
-				localStorage.setItem("jsondata", jsonDataText);
-			}
-			wrapperFunction = () => {
-				this.dataToJson();
-				updateState();
-				
-			}
+				if(jsondata.active[0] == undefined) {
+						jsondata.active = [{
+							Lektor: personalSelect.value,            
+							Kurs: kursArray[0],
+							Kurskod: kursArray[1],
+							Timmar: kursArray[2],
+							Period: kursArray[3]           						
+						}];
+        		} else {
+					for(let i = 0; i < jsondata.active.length; i++) {
+						if(jsondata.active[i].Kurs == kursArray[0]) {
+							alert("Någon har redan valt denna kurs.");
+						} else {
+							jsondata.active.push({
+								Lektor: personalSelect.value,
+								Kurs: kursArray[0],
+								Kurskod: kursArray[1],
+								Timmar: kursArray[2],
+								Period: kursArray[3]
+							});
+						}
+					}
+				}
+		var jsonDataText = JSON.stringify(jsondata);
+		localStorage.setItem("jsondata", jsonDataText);
+		}
+
+		wrapperFunction = () => {
+			this.dataToJson();
+			updateState();
+		}
 			
 			render () {
 				return (
@@ -167,68 +173,70 @@
 	class TableData extends React.Component {
 		constructor() {
 			super()
-			if (localStorage.getItem("jsondata") != null) {
-				jsonDataText = localStorage.getItem("jsondata");
-				jsondata = JSON.parse(jsonDataText);
-			}
-			render () {
-				return (
-					jsondata.active.map((x) => {
-						if (x.Period == 1){
-							return (
-								<tr>
-									<td>{x.Lektor}</td>
-									<td>{x.Kurs + " " + x.Kurskod}</td>
-                  					<td>{x.Timmar}</td>
-									<td></td>                  
-									<td></td>
-									<td></td>
-								</tr>
-                  			);
-                		}
-              
-								
-						if (x.Period == 2){
-							return (	
-								<tr>
-									<td>{x.Lektor}</td>
-									<td>{x.Kurs + " " + x.Kurskod}</td>
-									<td></td>
-                  					<td>{x.Timmar}</td>
-                  					<td></td>
-									<td></td>
-								</tr>
-							);
-						}
+				if (localStorage.getItem("jsondata") != null) {
+					jsonDataText = localStorage.getItem("jsondata");
+					jsondata = JSON.parse(jsonDataText);
+				}
+		}
 
-						if (x.Period == 3){
-							return (	
-								<tr>
-									<td>{x.Lektor}</td>
-									<td>{x.Kurs + " " + x.Kurskod}</td>
-									<td></td>
-									<td></td>
-                  					<td>{x.Timmar}</td>
-                  					<td></td>
-								</tr>
-							);
-						} else {
-							return (	
-								<tr>
-									<td>{x.Lektor}</td>
-									<td>{x.Kurs + " " + x.Kurskod}</td>
-									<td></td>
-									<td></td>
-                 					<td></td>
-                  					<td>{x.Timmar}</td>
-									
-								</tr>
-							);
-						}
-					})	
-				)
-			}
-    	}
+		render () {
+			return (
+				jsondata.active.map((x) => {
+					if (x.Period == 1){
+						return (
+							<tr>
+								<td>{x.Lektor}</td>
+								<td>{x.Kurs + " " + x.Kurskod}</td>
+								<td>{x.Timmar}</td>
+								<td></td>                  
+								<td></td>
+								<td></td>
+							</tr>
+						);
+					}
+			
+							
+					if (x.Period == 2){
+						return (	
+							<tr>
+								<td>{x.Lektor}</td>
+								<td>{x.Kurs + " " + x.Kurskod}</td>
+								<td></td>
+								<td>{x.Timmar}</td>
+								<td></td>
+								<td></td>
+							</tr>
+						);
+					}
+
+					if (x.Period == 3){
+						return (	
+							<tr>
+								<td>{x.Lektor}</td>
+								<td>{x.Kurs + " " + x.Kurskod}</td>
+								<td></td>
+								<td></td>
+								<td>{x.Timmar}</td>
+								<td></td>
+							</tr>
+						);
+					} else {
+						return (	
+							<tr>
+								<td>{x.Lektor}</td>
+								<td>{x.Kurs + " " + x.Kurskod}</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>{x.Timmar}</td>
+								
+							</tr>
+						);
+					}
+				})	
+			)
+		}
+	}
    
 		// kurser
 	class Table extends React.Component {
@@ -240,14 +248,17 @@
 			} else {
 				jsondata.active = new Object();
 			}
+
 			if(jsondata.active[0] == undefined) {
 				this.state = {
 					isUndefined: false
 				}
+				console.log(this.state);
 			} else {
 				this.state = {
 					isUndefined: true
 				}
+				console.log(this.state);
 			}
 			updateState = updateState.bind(this)
 		}
