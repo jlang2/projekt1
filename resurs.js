@@ -1,4 +1,4 @@
-﻿ const jsondata = { 
+﻿let jsondata = { 
   "Program": {
         "IA": {
             "Kurser": [
