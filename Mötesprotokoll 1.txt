@@ -1,0 +1,26 @@
+Mötesprotokoll
+
+Närvarande:
+ 
+backmano, lainepet, knappeni, holmtobi, langnajo, wikberse
+
+
+Vad som behövs göras:
+
+- Man väljer lärare, BDA eller IT-Bachelor, kurs, timantal och skickar in till tabellen på följande sätt:
+
+- Lärarnamnet kommer på # table rowin. 
+
+- På kurser/forskning rowin ska det komma kursnamn och kurskod från json objekte
+  eller bara Forskning som man kan välja på dropdownen.
+
+- IA och BDA har egna kurser i sig som syns i json filen om IA är valt skall bara IAs kurser synnas. Samma med BDA.
+
+- Kurs timmarna kommer från json objekte alltså oftast 100 timmar, OBS! (på forskning skall man själv kunna sätta till timmar).
+
+- Timmarna läggs in i perioder table rowina enligt rätta perioder från json objekten,
+Perioderna är connected med rätta period tablerows från json objekte. (P1, P2, P3, P4).
+
+- Om raderna tar slut måste det genereras nya rows.
+
+- Man skall kunna ta bort en row om det behövs.
