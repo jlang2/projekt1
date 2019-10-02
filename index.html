@@ -10,147 +10,132 @@
 	<link rel="stylesheet" href="style.css" type="text/css" charset="utf-8">
 </head>
 <body>
-	<div id="root"></div>
+<div id="root"></div>
 	
-	<script type="text/babel">
+<script type="text/babel">
 	let jsonDataText;
 
 	function updateState(isUndefined) {
-		console.log("funkar");
 		isUndefined = true;
-    this.setState({isUndefined});
-    
-
+    	this.setState({isUndefined});
 	}
+
   	class SelectContainer extends React.Component {
-		  constructor() {
+		constructor() {
 			super()
 			this.state = {
-        isHidden: true
+        		isHidden: true
         
 			}
-		  }
-		  toggleHidden() {
+		}
+		toggleHidden() {
 			this.setState({
-        isHidden: !this.state.isHidden
-
-
+        		isHidden: !this.state.isHidden
 			})
       }
       
-
-      
-
-
-		  render() {
-			  return (
+		render() {
+			return (
         		<div>
-          		<select id="category" name="category" onChange={this.toggleHidden.bind(this)}>
-					<option value="BDA">BDA</option>
-					<option value="IT-Bachelor">IT-Bachelor</option>
-					
+          			<select id="category" name="category" onChange={this.toggleHidden.bind(this)}>
+						<option value="BDA">BDA</option>
+						<option value="IT-Bachelor">IT-Bachelor</option>					
 					</select>
-          		{this.state.isHidden && <BDAKurser />}
-          		{!this.state.isHidden && <IAKurser />}
-          	
-          
-    
+          			{this.state.isHidden && <BDAKurser />}
+          			{!this.state.isHidden && <IAKurser />} 
 				</div>
-			  )
-		  }
+			)
+		}
     }
     
     
-		class BDAKurser extends React.Component {
-			constructor() {
-				super()
-				if (localStorage.getItem("jsondata") != null) {
-					jsonDataText = localStorage.getItem("jsondata");
-					jsondata = JSON.parse(jsonDataText);
-				}
-			}
 
-			render() {
-				return (
-					<select id="kurserSelect">
-						{
-							jsondata.Program.BDA.Kurser.map((bdakurser) => {
-								return (
-									<option value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn}</option>
-								);
-							})
-						}
-					</select>
-				);
-			}
-    }
- 
-
-		class IAKurser extends React.Component {
-			constructor() {
-				super()
-				if (localStorage.getItem("jsondata") != null) {
-					jsonDataText = localStorage.getItem("jsondata");
-					jsondata = JSON.parse(jsonDataText);
-				}
-			}
-			render() {
-				return (
-					<select id="kurserSelect">
-						{
-							jsondata.Program.IA.Kurser.map((iakurser) =>  {
-								return (
-									<option value={iakurser.namn + "+" + iakurser.kurskod + "+" + iakurser.timmar + "+" + iakurser.period }>{iakurser.namn}</option>
-								);
-							})
-						}
-					</select>
-				);
+	class BDAKurser extends React.Component {
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
 			}
 		}
-		class Personal extends React.Component {
-			constructor() {
-				super()
-				if (localStorage.getItem("jsondata") != null) {
-					jsonDataText = localStorage.getItem("jsondata");
-					jsondata = JSON.parse(jsonDataText);
-				}
-			}
-			render() {
-				return (
-					<select id="personalSelect">
-						{
-							jsondata.Personal.map((person) => {
-								return (
-									<option value={person.Förnamn + " " + person.Efternamn}>{person.Förnamn + " " + person.Efternamn}</option>
-								);	
-							})
-           	}
-					</select>
-				);
-			}
+
+		render() {
+			return (
+				<select id="kurserSelect">
+					{
+						jsondata.Program.BDA.Kurser.map((bdakurser) => {
+							return (
+								<option value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn}</option>
+							);
+						})
+					}
+				</select>
+			);
+		}
     }
-
-      		
  
-		class Send extends React.Component {
-			constructor() {
-				super();
-				this.dataToJson = this.dataToJson.bind(this);
-			}
-			
-			dataToJson() {
-				const kursArray = kurserSelect.value.split("+");
-				if(jsondata.active[0] == undefined) {
-					jsondata.active = [{
-            Lektor: personalSelect.value,            
-            Kurs: kursArray[0],
-						Kurskod: kursArray[1],
-						Timmar: kursArray[2],
-            Period: kursArray[3]
 
-            
-						
+	class IAKurser extends React.Component {
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+		}
+		render() {
+			return (
+				<select id="kurserSelect">
+					{
+						jsondata.Program.IA.Kurser.map((iakurser) =>  {
+							return (
+								<option value={iakurser.namn + "+" + iakurser.kurskod + "+" + iakurser.timmar + "+" + iakurser.period }>{iakurser.namn}</option>
+							);
+						})
+					}
+				</select>
+			);
+		}
+	}
+	
+	class Personal extends React.Component {
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+		}
+		render() {
+			return (
+				<select id="personalSelect">
+					{
+						jsondata.Personal.map((person) => {
+							return (
+								<option value={person.Förnamn + " " + person.Efternamn}>{person.Förnamn + " " + person.Efternamn}</option>
+							);	
+						})
+					}
+				</select>
+			);
+		}
+	}
+	     		 
+	class Send extends React.Component {
+		constructor() {
+			super();
+			this.dataToJson = this.dataToJson.bind(this);
+		}
+		
+		dataToJson() {
+			const kursArray = kurserSelect.value.split("+");
+			if(jsondata.active[0] == undefined) {
+				jsondata.active = [{
+					Lektor: personalSelect.value,            
+					Kurs: kursArray[0],
+					Kurskod: kursArray[1],
+					Timmar: kursArray[2],
+					Period: kursArray[3]           						
 					}];
         } else {
 				jsondata.active.push({
@@ -159,7 +144,7 @@
 					Kurskod: kursArray[1],
 					Timmar: kursArray[2],
 					Period: kursArray[3]
-				})
+				});
 			}
 				var jsonDataText = JSON.stringify(jsondata);
 				localStorage.setItem("jsondata", jsonDataText);
@@ -179,13 +164,12 @@
 
 
     
-		class TableData extends React.Component {
-			constructor() {
-				super()
-				if (localStorage.getItem("jsondata") != null) {
-					jsonDataText = localStorage.getItem("jsondata");
-					jsondata = JSON.parse(jsonDataText);
-				}
+	class TableData extends React.Component {
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
 			}
 			render () {
 				return (
@@ -247,56 +231,55 @@
     	}
    
 		// kurser
-		class Table extends React.Component {
-			constructor(props) {
-				super(props)
-				if (localStorage.getItem("jsondata") != null) {
-					jsonDataText = localStorage.getItem("jsondata");
-					jsondata = JSON.parse(jsonDataText);
-				} else {
-					jsondata.active = new Object();
+	class Table extends React.Component {
+		constructor(props) {
+			super(props)
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			} else {
+				jsondata.active = new Object();
+			}
+			if(jsondata.active[0] == undefined) {
+				this.state = {
+					isUndefined: false
 				}
-				if(jsondata.active[0] == undefined) {
-						this.state = {
-						isUndefined: false
-						}
-					} else {
-						this.state = {
-						isUndefined: true
-						}
-					}
-				updateState = updateState.bind(this)
+			} else {
+				this.state = {
+					isUndefined: true
+				}
 			}
-			render () {
-				return (
-					<table id="idtable"> 
-						<tr id="tr1">
-							<th id="lektor">Lektor</th>   							   
-              <th id="k1">Kurser</th>
-              
-							<th id="p1">P1</th> 
-								<th id="p2">P2</th>
-								<th id ="p3">P3</th>
-                <th id="p4">P4</th>
+			updateState = updateState.bind(this)
+		}
 
-						</tr>
-						{this.state.isUndefined && <TableData />}
-						
-					</table>
-				)
-			}
+		render () {
+			return (
+				<table id="idtable"> 
+					<tr id="tr1">
+						<th id="lektor">Lektor</th>   							   
+              			<th id="k1">Kurser</th>
+              			
+						<th id="p1">P1</th> 
+						<th id="p2">P2</th>
+						<th id ="p3">P3</th>
+                		<th id="p4">P4</th>
+					</tr>
+					{this.state.isUndefined && <TableData />}
+				</table>
+			)
+		}
     }
     
-		class Container extends React.Component {
-			render () {
-				return (
-					<div>
-						<Table />
-           				<Send />
-					</div>
-				)
-			}
+	class Container extends React.Component {
+		render () {
+			return (
+				<div>
+					<Table />
+           			<Send />
+				</div>
+			)
 		}
+	}
 
         ReactDOM.render(
 			<div id="idtable">
@@ -310,13 +293,9 @@
 
 
 </script>
- 
-    
-
-  </script>
 
 
 
-  <br>
+<br>
 </body>
 </html>
