@@ -26,8 +26,8 @@
 		  constructor() {
 			super()
 			this.state = {
-        isHidden: true,
-        showResults: false
+        isHidden: true
+        
 			}
 		  }
 		  toggleHidden() {
@@ -37,12 +37,9 @@
 
 			})
       }
-      toggleShow(){
-        this.setState({
-          showResults: !this.state.showResults
-        })
+      
 
-      }
+      
 
 
 		  render() {
@@ -51,11 +48,11 @@
           		<select id="category" name="category" onChange={this.toggleHidden.bind(this)}>
 					<option value="BDA">BDA</option>
 					<option value="IT-Bachelor">IT-Bachelor</option>
-					<option id="forskkk" value="Forskning">Forskning</option>
+					
 					</select>
           		{this.state.isHidden && <BDAKurser />}
           		{!this.state.isHidden && <IAKurser />}
-          		{this.state.showResults && <Forskning />}
+          	
           
     
 				</div>
@@ -63,24 +60,7 @@
 		  }
     }
     
-    /*
-    class Forskning extends React.Component {
-
-    render() {
-      return (
-        <div>
-
-          <select id="forskk" name="forskk">
-          <option value="Kurser">Forskning</option>
-          </select>
-
-          </div>
-      )
-    }
-  }
-   */
     
-
 		class BDAKurser extends React.Component {
 			constructor() {
 				super()
@@ -151,30 +131,7 @@
 			}
     }
 
-    
-    class Forskning extends React.Component {
-			render() {
-				return (
-					<option id="forskkk">
-						{
-              jsondata.Program.IA.Kurser.map((knamn) => {
-								return (
-									<option value={knamn.namn + " " + knamn.kurskod}>{knamn.namn}</option>
-								);
-							})
-                    }
-					</option>
-				);
-			}
-    }
-    
-    
-
-		function Hours() {
-			return (
-				<input type="text" name="hours" id="hours" placeholder="Timantal" defaultValue=""></input>
-			)
-    }
+      		
  
 		class Send extends React.Component {
 			constructor() {
@@ -186,8 +143,7 @@
 				const kursArray = kurserSelect.value.split("+");
 				if(jsondata.active[0] == undefined) {
 					jsondata.active = [{
-            Lektor: personalSelect.value,
-            Forskning: kursArray[0],
+            Lektor: personalSelect.value,            
             Kurs: kursArray[0],
 						Kurskod: kursArray[1],
 						Timmar: kursArray[2],
@@ -199,7 +155,6 @@
         } else {
 				jsondata.active.push({
 					Lektor: personalSelect.value,
-					Forskning: kursArray[0],
 					Kurs: kursArray[0],
 					Kurskod: kursArray[1],
 					Timmar: kursArray[2],
@@ -215,10 +170,6 @@
 				
 			}
 			
-<<<<<<< HEAD
-			
-=======
->>>>>>> 1d05b1b5d6e3378a13b3ecda90dc69c63d0e6a90
 			render () {
 				return (
 					<input type="button" name="button" id="button" onClick={this.wrapperFunction} value="Skicka"></input>
@@ -244,8 +195,8 @@
 								<tr>
 									<td>{x.Lektor}</td>
 									<td>{x.Kurs + " " + x.Kurskod}</td>
-                  					<td>{x.Forskning}</td>
-									<td>{x.Timmar}</td>                  
+                  					<td>{x.Timmar}</td>
+									<td></td>                  
 									<td></td>
 									<td></td>
 								</tr>
@@ -258,9 +209,9 @@
 								<tr>
 									<td>{x.Lektor}</td>
 									<td>{x.Kurs + " " + x.Kurskod}</td>
-									<td>{x.Forskning}</td>
-                  					<td></td>
+									<td></td>
                   					<td>{x.Timmar}</td>
+                  					<td></td>
 									<td></td>
 								</tr>
 							);
@@ -271,10 +222,10 @@
 								<tr>
 									<td>{x.Lektor}</td>
 									<td>{x.Kurs + " " + x.Kurskod}</td>
-									<td>{x.Forskning}</td>
 									<td></td>
-                  					<td></td>
+									<td></td>
                   					<td>{x.Timmar}</td>
+                  					<td></td>
 								</tr>
 							);
 						} else {
@@ -282,11 +233,11 @@
 								<tr>
 									<td>{x.Lektor}</td>
 									<td>{x.Kurs + " " + x.Kurskod}</td>
-									<td>{x.Forskning}</td>
+									<td></td>
 									<td></td>
                  					<td></td>
-                  					<td></td>
-									<td>{x.Timmar}</td>
+                  					<td>{x.Timmar}</td>
+									
 								</tr>
 							);
 						}
@@ -322,7 +273,7 @@
 						<tr id="tr1">
 							<th id="lektor">Lektor</th>   							   
               <th id="k1">Kurser</th>
-              <th id="kf">Forskning</th>
+              
 							<th id="p1">P1</th> 
 								<th id="p2">P2</th>
 								<th id ="p3">P3</th>
@@ -351,7 +302,7 @@
 			<div id="idtable">
 				<SelectContainer />
 				<Personal />
-				<Hours />
+				
 				<Container />
 			</div>,                                                        
                 document.getElementById("root")    
