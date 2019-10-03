@@ -37,7 +37,7 @@
 		render() {
 			return (
         		<div>
-          			<select id="category" name="category" onChange={this.toggleHidden.bind(this)}>
+          			<select id="category" class="item1" name="category" onChange={this.toggleHidden.bind(this)}>
 						<option value="BDA">BDA</option>
 						<option value="IT-Bachelor">IT-Bachelor</option>					
 					</select>
@@ -61,9 +61,7 @@
 
 		render() {
 			return (
-				<div>
-				
-				<select id="kurserSelect">
+				<select id="kurserSelect" class="item2">
 					{
 						jsondata.Program.BDA.Kurser.map((bdakurser) => {
 							return (
@@ -72,7 +70,6 @@
 						})
 					}
 				</select>
-				</div>
 			);
 		}
     }
@@ -111,7 +108,7 @@
 		}
 		render() {
 			return (
-				<select id="personalSelect">
+				<select id="personalSelect"  class="item3">
 					{
 						jsondata.Personal.map((person) => {
 							return (
@@ -166,7 +163,7 @@
 			
 			render() {
 				return (
-					<input type="button" name="button" id="button" onClick={this.wrapperFunction} value="Skicka"></input>
+					<input type="button" name="button" id="button" class="item4" onClick={this.wrapperFunction} value="Skicka"></input>
 				);
 			}
     }
@@ -288,7 +285,7 @@
 	class Container extends React.Component {
 		render () {
 			return (
-				<div>
+				<div  class="item5">
 					<Table />
 				</div>
 			)
