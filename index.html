@@ -37,7 +37,6 @@
 		render() {
 			return (
         		<div>
-				<h2>Test</h2>
           			<select id="category" name="category" onChange={this.toggleHidden.bind(this)}>
 						<option value="BDA">BDA</option>
 						<option value="IT-Bachelor">IT-Bachelor</option>					
@@ -171,15 +170,7 @@
 				);
 			}
     }
-	class DelRow extends React.Component{
-		constructor() {
-			super();
-			this.deletePerson = this.deletePerson.bind(this);
-		}
-		handleRemove(){
-			
-		}
-	}
+	
 
     
 	class TableData extends React.Component {
