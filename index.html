@@ -37,6 +37,7 @@
 		render() {
 			return (
         		<div>
+				<h2>Test</h2>
           			<select id="category" name="category" onChange={this.toggleHidden.bind(this)}>
 						<option value="BDA">BDA</option>
 						<option value="IT-Bachelor">IT-Bachelor</option>					
@@ -61,6 +62,8 @@
 
 		render() {
 			return (
+				<div>
+				
 				<select id="kurserSelect">
 					{
 						jsondata.Program.BDA.Kurser.map((bdakurser) => {
@@ -70,6 +73,7 @@
 						})
 					}
 				</select>
+				</div>
 			);
 		}
     }
@@ -167,7 +171,15 @@
 				);
 			}
     }
-
+	class DelRow extends React.Component{
+		constructor() {
+			super();
+			this.deletePerson = this.deletePerson.bind(this);
+		}
+		handleRemove(){
+			
+		}
+	}
 
     
 	class TableData extends React.Component {
@@ -191,6 +203,7 @@
 								<td></td>                  
 								<td></td>
 								<td></td>
+								<td><button class="delbtn" onclick="deleteRow(this)" >X</button></td>
 							</tr>
 						);
 					}
@@ -205,6 +218,7 @@
 								<td>{x.Timmar}</td>
 								<td></td>
 								<td></td>
+								<td><button class="delbtn" onclick="deleteRow(this)" >X</button></td>
 							</tr>
 						);
 					}
@@ -218,6 +232,7 @@
 								<td></td>
 								<td>{x.Timmar}</td>
 								<td></td>
+								<td><button class="delbtn" onclick="deleteRow(this)" >X</button></td>
 							</tr>
 						);
 					} else {
@@ -229,7 +244,7 @@
 								<td></td>
 								<td></td>
 								<td>{x.Timmar}</td>
-								
+								<td><button class="delbtn" onclick="deleteRow(this)" >X</button></td>
 							</tr>
 						);
 					}
@@ -284,7 +299,6 @@
 			return (
 				<div>
 					<Table />
-           			<Send />
 				</div>
 			)
 		}
@@ -294,7 +308,7 @@
 			<div id="idtable">
 				<SelectContainer />
 				<Personal />
-				
+				<Send />
 				<Container />
 			</div>,                                                        
                 document.getElementById("root")    
