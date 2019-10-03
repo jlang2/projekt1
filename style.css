@@ -1,10 +1,10 @@
-html{
-  background-image: linear-gradient(-90deg, yellow,  salmon);
-  width: 100%;
+html {
   height: 100%;
+  background-color: rgba(251, 195, 90, 0.5);
 }
 body {
-  margin: 4em;
+  margin:2em;
+  padding: 1em;
 }
 section {
   padding:10px 10px;
@@ -27,73 +27,62 @@ li a {
   text-decoration: none;
 }
 li a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 h1 {
-  padding: 10px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
-  text-shadow: 2px 2px 3px crimson;
-  font-size: 30pt;
+    padding: 10px;
 }
 table, th, td {
-  border: 1px dashed black;
+  border: 1px solid black;
   border-collapse: collapse;
-  padding: 50px;
 }
 th, td {
-  padding: 15px;
   text-align: left;
+  padding: 10px;
 }
 table#t01 {
   width: 100%;    
   background-color: #f1f1c1;
 }
-
+tr:nth-child(even) {background-color: #fad59a85;}
+tr:hover {background-color: #ffd2a8;}
 /*BLOCK FÄRGER*/
 th#nmr1{
   border-style: solid;
-  border-width: 5px;
 }
 th#k1 {
-  padding: 25px;
   border-style: solid;
-  border-width: 5px;
 }
-
 th#p1 {
   background-color:blue;
-  border-style: solid;
-  border-width: 5px;
-
 }
 th#p2 {
   background-color:red;
-  border-style: solid;
-  border-width: 5px;
-  
 }
 th#p3 {
   background-color:orange;
-  border-style: solid;
-  border-width: 5px;
-  
+
 }
 th#p4 {
   background-color:yellow;
-  border-style: solid;
-  border-width: 5px;
-  
 }
-#idtable{
+
+/*forskning spalt css*/
+select#forskkkSelect {
   position:relative;
-  top: 40px;
+  top: -20px;
+  left:400px;
 }
-#submit{
-  border-radius: 12px;
-  background-color: aqua;
-  font-size: 16pt;
+/*hours spalten*/
+input#hours
+{
+  position:relative;
+  right: 450px;
 }
- 
+/*forskning textbox*/
+
+
+
 /*DROP DOWN MENY*/
 .dropbtn {
   background-color: #3498DB;
@@ -102,17 +91,15 @@ th#p4 {
   font-size: 16px;
   border: none;
   cursor: pointer;
-}
+} 
 
 .dropbtn:hover, .dropbtn:focus {
   background-color: #2980B9;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -121,15 +108,25 @@ th#p4 {
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-}
-
+} 
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
-
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
+#root {
+  padding-top: 15px;
+}
+#rows-parent{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-row-gap: 1em;
+  grid-column-gap: 5px;
+  padding: 10px;
+}
+

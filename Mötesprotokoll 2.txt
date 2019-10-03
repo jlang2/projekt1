@@ -1,0 +1,30 @@
+Mötesprotokoll #2
+
+Närvarande:
+ 
+backmano, lainepet, knappeni, holmtobi, langnajo, wikberse, rotkonen
+
+
+Gjort sen senaste mötet:
+
+- Lärarnamnet kommer på # table rowin. 
+
+- På kurser/forskning rowin ska det komma kursnamn och kurskod från json objekte.
+  
+- IA och BDA har egna kurser i sig som syns i json filen om IA är valt skall bara IAs kurser synnas. Samma med BDA.
+
+- Kurs timmarna kommer från json objekte alltså oftast 100 timmar
+
+- Timmarna läggs in i perioder table rowina enligt rätta perioder från json objekten,
+Perioderna är connected med rätta period tablerows från json objekte. (P1, P2, P3, P4).
+
+- Om raderna tar slut måste det genereras nya rows.
+
+Behövs göras ennu:
+
+- När forskning är valt borde man kunna ändra timmarna, atm tar det bara timmarna från jsonen.
+
+- Skapa en knapp för att ta bort rows.
+
+
+
