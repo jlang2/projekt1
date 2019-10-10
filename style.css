@@ -1,8 +1,9 @@
 html {
-  height: 100%;
   background-color: rgba(251, 195, 90, 0.5);
+  width: 100%;
 }
 body {
+  width: 100%;
   margin:auto;
   padding: 1em;
 }
@@ -32,6 +33,9 @@ li a:hover {
 h2 {
     margin: 0em;
 }
+
+
+
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
@@ -104,9 +108,7 @@ th#p4 {
 #root {
   padding-top: 15px;
 }
-#idtable{
-  
-}
+
 .delbtn{
   border-radius: 8px;
   background-color: white; 
@@ -117,6 +119,14 @@ th#p4 {
   background-color: #f44336;
   color: white;
 }
-#personalSelect{
-  float: left;
+
+.table-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.table {
+  padding: 10px;
 }
