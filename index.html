@@ -13,11 +13,25 @@
 <div id="root"></div>
 	
 <script type="text/babel">
+
 	let jsonDataText;
+	let kursSwitch = 0;
 
 	function updateState(isUndefined) {
 		isUndefined = true;
     	this.setState({isUndefined});
+	}
+
+	function handleUpdate() {
+		this.forceUpdate();
+	}
+
+	function handleUpdateKaks() {
+		this.forceUpdate();
+	}
+
+	function handleUpdateKolme() {
+		this.forceUpdate();
 	}
 
   	class SelectContainer extends React.Component {
@@ -25,10 +39,15 @@
 			super()
 			this.state = {
         		isHidden: true
-        
 			}
 		}
+		
 		toggleHidden() {
+			if(kursSwitch == 0) {
+				kursSwitch = 1;
+			} else {
+				kursSwitch = 0;
+			}
 			this.setState({
         		isHidden: !this.state.isHidden
 			})
@@ -37,18 +56,18 @@
 		render() {
 			return (
         		<div>
-          			<select id="category" class="item1" name="category" onChange={this.toggleHidden.bind(this)}>
+          			<select id="category" name="category" onChange={this.toggleHidden.bind(this)}>
 						<option value="BDA">BDA</option>
 						<option value="IT-Bachelor">IT-Bachelor</option>					
 					</select>
           			{this.state.isHidden && <BDAKurser />}
-          			{!this.state.isHidden && <IAKurser />} 
+					{!this.state.isHidden && <IAKurser />}
+					<Personal />
+					<Send />
 				</div>
 			)
 		}
     }
-    
-    
 
 	class BDAKurser extends React.Component {
 		constructor() {
@@ -57,15 +76,21 @@
 				jsonDataText = localStorage.getItem("jsondata");
 				jsondata = JSON.parse(jsonDataText);
 			}
+			handleUpdateKaks = handleUpdateKaks.bind(this)
 		}
 
 		render() {
 			return (
-				<select id="kurserSelect" class="item2">
+				<select id="kurserSelect">
 					{
-						jsondata.Program.BDA.Kurser.map((bdakurser) => {
+						jsondata.Program.BDA.Kurser.map((bdakurser, i) => {
+							for(let counter = 0; counter < jsondata.active.length; counter++) {
+								if(jsondata.active[counter].Kurs == bdakurser.namn) { // checkar om kursen redan är vald
+									return; // isåfall renderera inte
+								}
+							}
 							return (
-								<option value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn}</option>
+								<option key={i} value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn + " " + bdakurser.kurskod}</option>
 							);
 						})
 					}
@@ -76,20 +101,28 @@
  
 
 	class IAKurser extends React.Component {
+
 		constructor() {
 			super()
 			if (localStorage.getItem("jsondata") != null) {
 				jsonDataText = localStorage.getItem("jsondata");
 				jsondata = JSON.parse(jsonDataText);
 			}
+			handleUpdateKolme = handleUpdateKolme.bind(this)
 		}
+
 		render() {
 			return (
 				<select id="kurserSelect">
 					{
-						jsondata.Program.IA.Kurser.map((iakurser) =>  {
+						jsondata.Program.IA.Kurser.map((iakurser, i) => {
+							for(let counter = 0; counter < jsondata.active.length; counter++) {
+								if(jsondata.active[counter].Kurs == iakurser.namn) { // checkar om kursen redan är vald
+									return; // isåfall renderera inte
+								}
+							}
 							return (
-								<option value={iakurser.namn + "+" + iakurser.kurskod + "+" + iakurser.timmar + "+" + iakurser.period }>{iakurser.namn}</option>
+								<option key={i} value={iakurser.namn + "+" + iakurser.kurskod + "+" + iakurser.timmar + "+" + iakurser.period }>{iakurser.namn + " " + iakurser.kurskod}</option>
 							);
 						})
 					}
@@ -108,11 +141,11 @@
 		}
 		render() {
 			return (
-				<select id="personalSelect"  class="item3">
+				<select id="personalSelect">
 					{
-						jsondata.Personal.map((person) => {
+						jsondata.Personal.map((person, i) => {
 							return (
-								<option value={person.Förnamn + " " + person.Efternamn}>{person.Förnamn + " " + person.Efternamn}</option>
+								<option key={i} value={person.Förnamn + " " + person.Efternamn}>{person.Förnamn + " " + person.Efternamn}</option>
 							);	
 						})
 					}
@@ -120,7 +153,7 @@
 			);
 		}
 	}
-	     		 
+
 	class Send extends React.Component {
 		constructor() {
 			super();
@@ -129,41 +162,79 @@
 		
 		dataToJson() {
 			const kursArray = kurserSelect.value.split("+");
-				if(jsondata.active[0] == undefined) {
-						jsondata.active = [{
-							Lektor: personalSelect.value,            
-							Kurs: kursArray[0],
-							Kurskod: kursArray[1],
-							Timmar: kursArray[2],
-							Period: kursArray[3]           						
-						}];
-        		} else {
-					for(let i = 0; i < jsondata.active.length; i++) {
-						if(jsondata.active[i].Kurs == kursArray[0]) {
-							alert("Någon har redan valt denna kurs.");
+			const lektorNamn = personalSelect.value;
+
+			if(jsondata.active[0] == undefined) {
+
+				for(let i = 0; i < jsondata.Personal.length; i++) {
+					let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
+					if(namn == lektorNamn) {
+						jsondata.Personal[i].Timmar = 100;
+						jsondata.Personal[i].Kursantal = 1;
+					}
+				}
+
+				jsondata.active = [{
+					Lektor: lektorNamn,            
+					Kurs: kursArray[0],
+					Kurskod: kursArray[1],
+					Timmar: kursArray[2],
+					Period: kursArray[3]
+				}];
+
+			} else {
+				for(let i = 0; i < jsondata.active.length; i++) {
+
+					if(jsondata.active[i].Kurs == kursArray[0]) {
+						alert("Någon har redan valt denna kurs.");
+						return;
+					}
+				}
+
+				for(let i = 0; i < jsondata.Personal.length; i++) {
+					let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
+					if(namn == lektorNamn) {
+						if(jsondata.Personal[i].Timmar >= 1600 || jsondata.Personal[i].Kursantal >= 11) { // timantal och kursantal check
+							alert(namn + " har redan maximala antal kurser/timmar.");
 							return;
+						} else {
+							if(jsondata.Personal[i].Timmar == undefined) {
+								jsondata.Personal[i].Timmar = 100;
+								jsondata.Personal[i].Kursantal = 1;
+							} else {
+								jsondata.Personal[i].Timmar += 100;
+								jsondata.Personal[i].Kursantal++;
+							}
 						}
 					}
-					jsondata.active.push({
-						Lektor: personalSelect.value,
-						Kurs: kursArray[0],
-						Kurskod: kursArray[1],
-						Timmar: kursArray[2],
-						Period: kursArray[3]
-						});
 				}
-		var jsonDataText = JSON.stringify(jsondata);
+
+				jsondata.active.push({
+					Lektor: lektorNamn,
+					Kurs: kursArray[0],
+					Kurskod: kursArray[1],
+					Timmar: kursArray[2],
+					Period: kursArray[3]
+				});
+			}
+		jsonDataText = JSON.stringify(jsondata);
 		localStorage.setItem("jsondata", jsonDataText);
 		}
 
 		wrapperFunction = () => {
 			this.dataToJson();
 			updateState();
+			handleUpdate();
+			if(kursSwitch == 0) {
+				handleUpdateKaks();
+			} else {
+				handleUpdateKolme();
+			}
 		}
 			
 			render() {
 				return (
-					<input type="button" name="button" id="button" class="item4" onClick={this.wrapperFunction} value="Skicka"></input>
+					<input type="button" name="button" id="button" onClick={this.wrapperFunction} value="Skicka"></input>
 				);
 			}
     }
@@ -177,62 +248,93 @@
 					jsonDataText = localStorage.getItem("jsondata");
 					jsondata = JSON.parse(jsonDataText);
 				}
+			this.deleteRow = this.deleteRow.bind(this);
+		}
+
+		wrapperFunction = () => {
+			this.deleteRow(event);
+			handleUpdate();
+			if(kursSwitch == 0) {
+				handleUpdateKaks();
+			} else {
+				handleUpdateKolme();
+			}
+		}
+
+
+		deleteRow(event) { // funktion för att ta bort rader
+			let timmar;
+			const id = event.target.id; // tar id för knappen man tryckt på
+			const element = document.getElementById(id);
+			const row = element.parentElement.parentElement.children;
+			const lektor = row[0].firstChild.data; // data som visas i tabellen
+			const kurs = row[1].firstChild.data; // data som visas i tabellen
+			for(let i = 0; i < jsondata.active.length; i++) { // loop för att hitta värdet i jsondata.active som korresponderar med värdet i tabellen
+				if(jsondata.active[i].Kurs == kurs) {
+					timmar = jsondata.active[i].Timmar; // 1.0. sparar timmar för kursen i variabel
+					jsondata.active.splice(i, 1); // tar bort värde ur jsondata.active vid position i
+				}
+			}
+			for(let i = 0; i < jsondata.Personal.length; i++) { // loop för att hitta namnet i jsondata.Personal som korresponderar med namnet i tabellen
+						let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
+						if(namn == lektor) { // const lektor = row[0].firstChild.data;
+							jsondata.Personal[i].Timmar -= timmar; // 1.1. tar bort timmar för kursen i 1.0. från timantalet
+							jsondata.Personal[i].Kursantal--;
+						}
+					}
+			jsonDataText = JSON.stringify(jsondata);
+			localStorage.setItem("jsondata", jsonDataText);
+			this.forceUpdate();
 		}
 
 		render () {
 			return (
-				jsondata.active.map((x) => {
+				jsondata.active.map((x, i) => {
+					let id = "row" + i;
+					let remove = "remove" + i;
 					if (x.Period == 1){
 						return (
-							<tr>
+							<tr key={i} id={id}>
 								<td>{x.Lektor}</td>
-								<td>{x.Kurs + " " + x.Kurskod}</td>
-								<td>{x.Timmar}</td>
-								<td></td>                  
-								<td></td>
-								<td></td>
-								<td><button class="delbtn" onclick="deleteRow(this)" >X</button></td>
+								<td>{x.Kurs}</td>
+								<td>{x.Kurskod}</td>
+								<td>1</td>
+								<td><input type="button" name="button" id={remove} onClick={this.wrapperFunction} value="X"></input></td>
 							</tr>
 						);
 					}
 			
 							
 					if (x.Period == 2){
-						return (	
-							<tr>
+						return (
+							<tr key={i} id={id}>
 								<td>{x.Lektor}</td>
-								<td>{x.Kurs + " " + x.Kurskod}</td>
-								<td></td>
-								<td>{x.Timmar}</td>
-								<td></td>
-								<td></td>
-								<td><button class="delbtn" onclick="deleteRow(this)" >X</button></td>
+								<td>{x.Kurs}</td>
+								<td>{x.Kurskod}</td>
+								<td>2</td>
+								<td><input type="button" name="button" id={remove} onClick={this.wrapperFunction} value="X"></input></td>
 							</tr>
 						);
 					}
 
 					if (x.Period == 3){
-						return (	
-							<tr>
+						return (
+							<tr key={i} id={id}>
 								<td>{x.Lektor}</td>
-								<td>{x.Kurs + " " + x.Kurskod}</td>
-								<td></td>
-								<td></td>
-								<td>{x.Timmar}</td>
-								<td></td>
-								<td><button class="delbtn" onclick="deleteRow(this)" >X</button></td>
+								<td>{x.Kurs}</td>
+								<td>{x.Kurskod}</td>
+								<td>3</td>
+								<td><input type="button" name="button" id={remove} onClick={this.wrapperFunction} value="X"></input></td>
 							</tr>
 						);
 					} else {
-						return (	
-							<tr>
+						return (
+							<tr key={i} id={id}>
 								<td>{x.Lektor}</td>
-								<td>{x.Kurs + " " + x.Kurskod}</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>{x.Timmar}</td>
-								<td><button class="delbtn" onclick="deleteRow(this)" >X</button></td>
+								<td>{x.Kurs}</td>
+								<td>{x.Kurskod}</td>
+								<td>4</td>
+								<td><input type="button" name="button" id={remove} onClick={this.wrapperFunction} value="X"></input></td>
 							</tr>
 						);
 					}
@@ -240,8 +342,63 @@
 			)
 		}
 	}
+
+	class HourTableData extends React.Component {
+		constructor() {
+			super()
+				if (localStorage.getItem("jsondata") != null) {
+					jsonDataText = localStorage.getItem("jsondata");
+					jsondata = JSON.parse(jsonDataText);
+				}
+		}
+
+		render () {
+			return (
+				jsondata.Personal.map((x, i) => {
+					if(x.Timmar != undefined && x.Timmar != 0) {
+					return (
+						<tr key={i}>
+							<td>{x.Förnamn + " " + x.Efternamn}</td>
+							<td>{x.Timmar + "h"}</td>
+							<td>{x.Kursantal}</td>
+						</tr>
+					);
+					}
+				})
+			)
+		}
+	}
+
+	class HourTable extends React.Component {
+
+		constructor(props) {
+			super(props)
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			} else {
+				jsondata.active = new Object();
+			}
+			handleUpdate = handleUpdate.bind(this)
+		}
+
+		render () {
+			return (
+				<table> 
+					<tbody>
+						<tr>
+							<th>Lektor</th>
+							<th>Timantal</th>
+							<th>Kursantal</th>
+						</tr>
+						<HourTableData />
+					</tbody>
+				</table>
+			)
+		}
+	}
    
-		// kurser
+	// kurser
 	class Table extends React.Component {
 		constructor(props) {
 			super(props)
@@ -267,16 +424,15 @@
 		render () {
 			return (
 				<table id="idtable"> 
-					<tr id="tr1">
-						<th id="lektor">Lektor</th>   							   
-              			<th id="k1">Kurser</th>
-              			
-						<th id="p1">P1</th> 
-						<th id="p2">P2</th>
-						<th id ="p3">P3</th>
-                		<th id="p4">P4</th>
-					</tr>
-					{this.state.isUndefined && <TableData />}
+					<tbody>
+						<tr id="tr1">
+							<th>Lektor</th>
+							<th>Kurs</th>
+							<th>Kurskod</th>
+							<th>Period</th>
+						</tr>
+						{this.state.isUndefined && <TableData />}
+					</tbody>
 				</table>
 			)
 		}
@@ -285,22 +441,25 @@
 	class Container extends React.Component {
 		render () {
 			return (
-				<div  class="item5">
-					<Table />
+				<div className="table-container">
+					<div className="table">
+						<Table />
+					</div>
+					<div className="table">
+						<HourTable />
+					</div>
 				</div>
 			)
 		}
 	}
 
         ReactDOM.render(
-			<div id="idtable">
+			<div id="container-main">
 				<SelectContainer />
-				<Personal />
-				<Send />
 				<Container />
-			</div>,                                                        
-                document.getElementById("root")    
-            );
+			</div>,
+            document.getElementById("root")
+        );
 
 
 </script>
