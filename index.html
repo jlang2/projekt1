@@ -19,7 +19,7 @@
 
 	function updateState(isUndefined) {
 		isUndefined = true;
-    	this.setState({isUndefined});
+    	this.setState({isUndefined: isUndefined});
 	}
 
 	function handleUpdate() {
@@ -453,13 +453,13 @@
 		}
 	}
 
-        ReactDOM.render(
-			<div id="container-main">
-				<SelectContainer />
-				<Container />
-			</div>,
-            document.getElementById("root")
-        );
+	ReactDOM.render(
+		<div id="container-main">
+			<SelectContainer />
+			<Container />
+		</div>,
+		document.getElementById("root")
+	);
 
 
 </script>
