@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="https://unpkg.com/react@16.9.0/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16.9.0/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script src="resurs.js"></script>
+	<link rel="stylesheet" href="style.css" type="text/css" charset="utf-8">
+</head>
+<body>
+<div id="root"></div>
+	
+<script type="text/babel">
+	let jsonDataText;
+
+	class AddPersonal extends React.Component {
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+
+			this.addLektor = this.addLektor.bind(this)
+		}
+
+
+		addLektor() {
+			const fornamn = document.getElementById("fornamn-input").value;
+			const efternamn = document.getElementById("efternamn-input").value;
+			document.getElementById("fornamn-input").value = "";
+			document.getElementById("efternamn-input").value = "";
+			if(fornamn != "" && efternamn != "") {
+				const objectToInsert = {
+					"Förnamn": fornamn,
+					"Efternamn": efternamn
+				}
+				jsondata.Personal.push(objectToInsert);
+				jsonDataText = JSON.stringify(jsondata);
+				localStorage.setItem("jsondata", jsonDataText);
+			} else {
+				alert("Ange Förnamn och Efternamn.")
+			}
+		}
+
+
+		render() {
+			return (
+				<div>
+					<h1>Lägg till lektor</h1>
+					<input type="text" id="fornamn-input" placeholder="Förnamn"></input>
+					<input type="text" id="efternamn-input" placeholder="Efternamn"></input>
+					<input type="button" value="Sänd" onClick={this.addLektor}></input>
+				</div>
+				
+			);
+		}
+	}
+
+	class RemovePersonal extends React.Component {
+
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+			this.removeLektor = this.removeLektor.bind(this)
+		}
+
+		removeLektor() {
+			let lektorToRemove = document.getElementById("personalSelect").value;
+			lektorToRemove = lektorToRemove.split(" ");
+			const fornamn = lektorToRemove[0];
+			const efternamn = lektorToRemove[1];
+			for(let i = 0; i < jsondata.Personal.length; i++) {
+				if(jsondata.Personal[i].Förnamn == fornamn && jsondata.Personal[i].Efternamn == efternamn) {
+					if(confirm("Är du säker på att du vill ta bort " + fornamn + " " + efternamn + " från listan över lektorer?")) {
+						jsondata.Personal.splice(i, 1);
+						jsonDataText = JSON.stringify(jsondata);
+						localStorage.setItem("jsondata", jsonDataText);
+						this.forceUpdate();
+					}
+				}
+			}
+		}
+
+		render() {
+			return (
+				<div>
+				<h1>Ta bort lektor</h1>
+				<select id="personalSelect">
+					{
+						jsondata.Personal.map((person, i) => {
+							return (
+								<option key={i} value={person.Förnamn + " " + person.Efternamn}>{person.Förnamn + " " + person.Efternamn}</option>
+							);	
+						})
+					}
+				</select>
+				<input type="button" value="Ta bort" onClick={this.removeLektor}></input>
+				</div>
+			);
+		}
+	}
+
+	ReactDOM.render(
+		<div id="container-main">
+		<AddPersonal />
+		<RemovePersonal />
+		</div>,
+		document.getElementById("root")
+	);
+</script>
+
+
+
+<br>
+</body>
+</html>
