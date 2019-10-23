@@ -19,6 +19,93 @@
 		this.setState({isUpdated: !this.state.isUpdated})
 	}
 
+
+	class BDAKurser extends React.Component {
+		constructor() {
+			super()
+
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+		}
+
+		render() {
+			return (
+				<select id="kurserSelect">
+				<option value="default">Välj kurs</option>
+					{
+						jsondata.Program.BDA.Kurser.map((bdakurser, i) => {
+
+							return (
+								<div>
+									<option key={i} value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn + " " + bdakurser.kurskod}</option>
+								</div>
+								
+							);
+						})
+					}
+				</select>
+			);
+		}
+    }
+ 
+
+	class IAKurser extends React.Component {
+
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+		}
+
+		render() {
+			let exportKurs;
+			return (
+				<select id="kurserSelect">
+				<option value="default">Välj kurs</option>
+					{
+						jsondata.Program.IA.Kurser.map((iakurser, i) => {
+							if(i == 0) {
+								exportKurs = iakurser.namn;
+							}
+							if(jsondata.active != undefined) {
+								for(let counter = 0; counter < jsondata.active.length; counter++) {
+									if(jsondata.active[counter].Kurs == iakurser.namn) { // checkar om kursen redan är vald
+										return; // isåfall renderera inte
+									}
+								}
+							}
+							
+							return (
+								<option key={i} value={iakurser.namn + "+" + iakurser.kurskod + "+" + iakurser.timmar + "+" + iakurser.period }>{iakurser.namn + " " + iakurser.kurskod}</option>
+							);
+						})
+					}
+				</select>
+			);
+		}
+	}
+
+
+	function NavBar() {
+		return (
+			<div id="navbar">
+				<ul>
+					<a href="index.html">
+						<li>Kursväljaren</li>
+					</a>
+					<a href="">
+						<li>Redigera</li>
+					</a>
+				</ul>
+			</div>
+			
+		)
+	}
+
 	class AddPersonal extends React.Component {
 		constructor() {
 			super()
@@ -42,6 +129,7 @@
 					"Efternamn": efternamn
 				}
 				jsondata.Personal.push(objectToInsert);
+				alert("Lektor tillagd.")
 				updateState();
 				jsonDataText = JSON.stringify(jsondata);
 				localStorage.setItem("jsondata", jsonDataText);
@@ -57,7 +145,7 @@
 					<h1>Lägg till lektor</h1>
 					<input type="text" id="fornamn-input" placeholder="Förnamn"></input>
 					<input type="text" id="efternamn-input" placeholder="Efternamn"></input>
-					<input type="button" value="Sänd" onClick={this.addLektor}></input>
+					<input type="button" value="Lägg till" onClick={this.addLektor}></input>
 				</div>
 				
 			);
@@ -116,10 +204,140 @@
 		}
 	}
 
+
+	class AddCourse extends React.Component {
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+			this.addCourse = this.addCourse.bind(this)
+		}
+
+		addCourse() {
+
+			let kursNamn = document.getElementById("kursnamn");
+			let kursKod = document.getElementById("kurskod");
+			let kursSelect = document.getElementById("kurs-select");
+			let period = document.getElementById("period");
+			let timAntal = document.getElementById("timantal");
+			if(kursNamn.value != "" && kursKod.value != "" && kursSelect.value != "default" && period.value != "default" && timAntal.value != "") {
+				
+				const objectToInsert = {
+					kurskod: kursKod.value,
+					namn: kursNamn.value,
+					period: parseInt(period.value),
+					timmar: parseInt(timAntal.value)
+				}
+
+				kursNamn.value = "";
+				kursKod.value = "";
+				timAntal.value = "";
+				period.value = "default";
+
+				if(kursSelect.value == "IA") {
+					jsondata.Program.IA.Kurser.push(objectToInsert);
+				} else if(kursSelect.value == "BDA") {
+					jsondata.Program.BDA.Kurser.push(objectToInsert);
+				}
+				kursSelect.value = "default";
+				jsonDataText = JSON.stringify(jsondata);
+				localStorage.setItem("jsondata", jsonDataText);
+				alert("Kurs tillagd.")
+			} else {
+				alert("Ange program, kursnamn, kurskod och period.");
+			}
+		}
+
+		render() {
+			return (
+				<div>
+					<h1>Lägg till kurs</h1>
+					<select id="kurs-select">
+						<option value="default">Ange program</option>
+						<option value="BDA">BDA</option>
+						<option value="IA">IA</option>
+					</select>
+					<input type="text" id="kursnamn" placeholder="Kursnamn"></input>
+					<input type="text" id="kurskod" placeholder="Kurskod"></input>
+					<input type="text" id="timantal" placeholder="Timantal"></input>
+					<select id="period">
+						<option value="default">Ange period</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+					</select>
+					<input type="button" value="Lägg till" onClick={this.addCourse}></input>
+				</div>
+			)
+		}
+	}
+
+	class EditCourseData extends React.Component {
+		constructor() {
+			super()
+		}
+
+		render() {
+			return (
+				<h2>test</h2>
+			)
+		}
+	}
+
+	class EditCourse extends React.Component {
+		constructor() {
+			super()
+			this.state = {
+				kurs: "IA"
+			}
+			this.toggleCourses = this.toggleCourses.bind(this)
+		}
+
+		toggleCourses() {
+			const editCourseSelect = document.getElementById("editcourse-select");
+			if(editCourseSelect.value == "BDA") {
+				this.setState({
+					kurs: "BDA"
+				})
+			} else if(editCourseSelect.value == "IA") {
+				this.setState({
+					kurs: "IA"
+				})
+			}
+		}
+
+		render() {
+			let swth;
+			if(this.state.kurs == "IA") {
+				swth = <IAKurser />;
+			} else if(this.state.kurs == "BDA") {
+				swth = <BDAKurser />;
+			}
+			return (
+				<div>
+					<h1>Redigera kurs</h1>
+					<select name="" id="editcourse-select" onChange={this.toggleCourses}>
+					<option value="IA">IA</option>
+					<option value="BDA">BDA</option>
+					</select>
+					{swth}
+					<EditCourseData />
+				</div>
+				
+			)
+		}
+	}
+
 	ReactDOM.render(
 		<div id="container-main">
+		<NavBar />
 		<AddPersonal />
 		<RemovePersonal />
+		<AddCourse />
+		<EditCourse />
 		</div>,
 		document.getElementById("root")
 	);
