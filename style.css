@@ -15,6 +15,8 @@ section {
 ul {
   padding: 0;
   margin: 0;
+  color:grey;
+  border: 2px black;
 }
 
 li {
@@ -125,4 +127,8 @@ th#p4 {
 
 .table {
   padding: 10px;
+}
+
+#navbarid{
+  color:red;
 }
