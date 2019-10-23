@@ -15,6 +15,21 @@
 <script type="text/babel">
 	let jsonDataText;
 
+	function NavBar() {
+		return (
+			<div id="navbar">
+				<ul>
+					<a href="index.html">
+						<li><b>Kursväljaren</b></li>
+					</a>
+					<a id="navbarid" href="">
+						<li><b>Redigera</b></li>
+					</a>
+				</ul>
+			</div>
+			
+		)
+	}
 	function updateState(isUpdated) {
 		this.setState({isUpdated: !this.state.isUpdated})
 	}
@@ -118,8 +133,10 @@
 
 	ReactDOM.render(
 		<div id="container-main">
+		<NavBar />
 		<AddPersonal />
 		<RemovePersonal />
+		
 		</div>,
 		document.getElementById("root")
 	);
