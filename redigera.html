@@ -31,21 +31,25 @@
 		}
 
 		render() {
+			let exportKurs;
 			return (
+				<div>
 				<select id="kurserSelect">
 				<option value="default">Välj kurs</option>
 					{
 						jsondata.Program.BDA.Kurser.map((bdakurser, i) => {
+							if(i == 0) {
+								exportKurs = bdakurser.namn;
+							}
 
 							return (
-								<div>
 									<option key={i} value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn + " " + bdakurser.kurskod}</option>
-								</div>
-								
 							);
 						})
 					}
 				</select>
+				<EditCourseData test={exportKurs} />
+				</div>
 			);
 		}
     }
@@ -64,19 +68,13 @@
 		render() {
 			let exportKurs;
 			return (
+				<div>
 				<select id="kurserSelect">
 				<option value="default">Välj kurs</option>
 					{
 						jsondata.Program.IA.Kurser.map((iakurser, i) => {
 							if(i == 0) {
 								exportKurs = iakurser.namn;
-							}
-							if(jsondata.active != undefined) {
-								for(let counter = 0; counter < jsondata.active.length; counter++) {
-									if(jsondata.active[counter].Kurs == iakurser.namn) { // checkar om kursen redan är vald
-										return; // isåfall renderera inte
-									}
-								}
 							}
 							
 							return (
@@ -85,6 +83,8 @@
 						})
 					}
 				</select>
+				<EditCourseData test={exportKurs} />
+				</div>
 			);
 		}
 	}
@@ -282,7 +282,7 @@
 
 		render() {
 			return (
-				<h2>test</h2>
+				<h2>{this.props.test}</h2>
 			)
 		}
 	}
@@ -324,7 +324,6 @@
 					<option value="BDA">BDA</option>
 					</select>
 					{swth}
-					<EditCourseData />
 				</div>
 				
 			)
