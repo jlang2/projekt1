@@ -1,11 +1,12 @@
 html {
   background-color: rgba(251, 195, 90, 0.5);
   width: 100%;
+  padding: 0px;
 }
 body {
   width: 100%;
   margin:auto;
-  padding: 1em;
+  padding: 0px;
 }
 section {
   padding:10px 10px;
@@ -15,6 +16,8 @@ section {
 ul {
   padding: 0;
   margin: 0;
+  color:grey;
+  border: 2px black;
 }
 
 li {
@@ -24,7 +27,6 @@ li {
 
 #navbar {
   padding-bottom: 20px;
-  color: lightgrey;
 }
 
 h2 {
@@ -130,4 +132,606 @@ th#p4 {
 
 #navbarid{
   color:red;
+}
+
+/*selector category css*/
+select#category {
+  position: relative;
+  transform: translate(2%, 7%);
+}
+
+select#category {
+  background-color: rgba(251, 195, 90, 0.5);
+  color: white;
+  padding: 5px;
+  width: 100px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline-style: groove;
+  outline-color: silver;
+}
+
+select#category ::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(251, 195, 90, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+select#category :hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+select#category select option {
+  padding: 30px;
+}
+
+
+/*kurserselect*/
+
+select#kurserSelect {
+  position: relative;
+  transform: translate(2%,7%);
+}
+
+select#kurserSelect {
+  background-color: rgba(251, 195, 90, 0.5);
+  color: white;
+  padding: 5px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline-style: groove;
+  outline-color: silver;
+}
+
+select#kurserSelect ::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(251, 195, 90, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+select#kurserSelect :hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+select#kurserSelect select option {
+  padding: 30px;
+}
+
+
+/*personalselect*/
+select#personalSelect {
+  position: relative;
+  transform: translate(3.3%, 7%);
+}
+
+select#personalSelect {
+  background-color: rgba(251, 195, 90, 0.5);
+  color: white;
+  padding: 5px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline-style: groove;
+  outline-color: silver;
+}
+
+select#personalSelect ::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(251, 195, 90, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+select#personalSelect :hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+select#personalSelect select option {
+  padding: 30px;
+}
+
+
+/*BUTTON CSS*/
+
+input#button {
+  color:white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: #e6c772;
+  width: 85px;
+  height: 38px;
+  position:relative;
+  transform: translate(40%, 0%);
+
+}
+
+/*navbar*/
+div#navbar {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 10px 0;
+  background-color: rgba(251, 195, 90, 0.5);
+  border: solid burlywood;
+  text-align: center; 
+  position:relative;
+  
+  
+}
+li {
+  font-weight: bold;
+}
+p {
+  font-weight: bold;
+}
+/*CSS redigera.html selectors*/
+/*personalselect*/
+select#personalSelect2 {
+  position: relative;
+  transform: translate(2%, 1%);
+}
+
+select#personalSelect2 {
+  background-color: rgba(251, 195, 90, 0.5);
+  color: white;
+  padding: 5px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline-style: groove;
+  outline-color: silver;
+}
+
+select#personalSelect2 ::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(251, 195, 90, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+select#personalSelect2 :hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+select#personalSelect2 select option {
+  padding: 30px;
+}
+
+/*kursselect*/
+
+select#kurserSelect2 {
+  position: relative;
+  transform: translate(2%, 0%);
+}
+
+select#kurserSelect2 {
+  background-color: rgba(251, 195, 90, 0.5);
+  color: white;
+  padding: 5px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline-style: groove;
+  outline-color: silver;
+}
+
+select#kurserSelect2 ::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(251, 195, 90, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+select#kurserSelect2 :hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+select#kurserSelect2 select option {
+  padding: 30px;
+}
+
+/*button*/
+input#buttonlektor {
+  color:white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: #e6c772;
+  width: 85px;
+  height: 38px;
+  position:relative;
+  transform: translate(12%, 0%);
+
+}
+input#laggtill {
+  color:white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: #e6c772;
+  width: 85px;
+  height: 38px;
+  position:relative;
+  transform: translate(12%, 0%);
+
+}
+
+input#laggkurs {
+  color:white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: #e6c772;
+  width: 85px;
+  height: 38px;
+  position:relative;
+  transform: translate(12%, 0%);
+
+}
+input#tabort {
+  color:white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: #e6c772;
+  width: 85px;
+  height: 38px;
+  position:relative;
+  transform: translate(12%, -8%);
+
+}
+input#redigerandra {
+  color:white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  background: #e6c772;
+  width: 85px;
+  height: 38px;
+  position:relative;
+  transform: translate(12%, 0%);
+
+}
+
+/*redigerakurs selector*/
+select#editcourse-select {
+  position: relative;
+  transform: translate(2%, 0%);
+}
+
+select#editcourse-select  {
+  background-color: rgba(251, 195, 90, 0.5);
+  color: white;
+  padding: 5px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline-style: groove;
+  outline-color: silver;
+}
+
+select#editcourse-select  ::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(251, 195, 90, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+select#editcourse-select  :hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+select#editcourse-select  select option {
+  padding: 30px;
+}
+
+/*tabort kurs selector*/
+select#kursSelect{
+  position: relative;
+  transform: translate(2%, 0%);
+}
+
+select#kursSelect  {
+  background-color: rgba(251, 195, 90, 0.5);
+  color: white;
+  padding: 5px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline-style: groove;
+  outline-color: silver;
+}
+
+select#kursSelect  ::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(251, 195, 90, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+select#kursSelect   :hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+select#kursSelect   select option {
+  padding: 30px;
+}
+
+/*select kurs-select*/
+select#kurs-select{
+  position: relative;
+  transform: translate(0%, 6%);
+}
+
+select#kurs-select  {
+  background-color: rgba(251, 195, 90, 0.5);
+  color: white;
+  padding: 5px;
+  margin: 5px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline-style: groove;
+  outline-color: silver;
+}
+
+select#kurs-select  ::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(251, 195, 90, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+select#kurs-select   :hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+select#kurs-select   select option {
+  padding: 30px;
+}
+
+/*selectperiod*/
+select#period{
+  position: relative;
+  transform: translate(2%, 7%);
+}
+
+select#period  {
+  background-color: rgba(251, 195, 90, 0.5);
+  color: white;
+  padding: 5px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline-style: groove;
+  outline-color: silver;
+}
+
+select#period ::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(251, 195, 90, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+select#period   :hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+select#period  select option {
+  padding: 30px;
+}
+
+
+/*input css*/
+input#fornamn-input {
+  width: 10%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input#efternamn-input {
+  width: 10%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  position: relative;
+  transform: translate(1%, 0%);
+}
+input#kursnamn{
+  width: 10%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input#kurskod{
+  width: 10%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input#timantal{
+  width: 10%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input#change-kurs-namn{
+  width: 15%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input#change-kurs-id{
+  width: 25%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input#change-kurs-timmar{
+  width: 15%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input#forskning-titel {
+  width: 13%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input#timantal-forskning {
+  width: 13%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: "Malgun Gothic Semilight";
 }
