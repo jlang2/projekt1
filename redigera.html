@@ -301,7 +301,7 @@
 	}
 
 	class RemoveCourse extends React.Component {
-
+		
 		constructor() {
 			super()
 			if (localStorage.getItem("jsondata") != null) {
@@ -310,39 +310,60 @@
 			}
 
 			this.state = {
-				isUpdated: false
+				kurs: "IA"
 			}
+			this.toggleCoursesDel = this.toggleCoursesDel.bind(this)
+		
 			updateState = updateState.bind(this)
 			this.removeKurs = this.removeKurs.bind(this)
 			updateRemoveFromAdd = updateRemoveFromAdd.bind(this)
 		}
+		toggleCoursesDel() {
+			const delCourseSelect = document.getElementById("delcourse-select");
+			if(delCourseSelect.value == "BDA") {
+				this.setState({
+					kurs: "BDA"
+				})
+			} else if(delCourseSelect.value == "IA") {
+				this.setState({
+					kurs: "IA"
+				})
+			}
+		}
 
 		removeKurs() {
-            	let kursToRemove = document.getElementById("kursSelect").value;
-				kursToRemove = kursToRemove.split("+");
-				const kursnamn = kursToRemove[0];
-            	const kurskod = kursToRemove[1];
-				const timmar = kursToRemove[2];
-            	const period = kursToRemove[3];
-            	for(let i = 0; i < jsondata.Program.IA.Kurser.length; i++) {
-					if(jsondata.Program.IA.Kurser[i].namn == kursnamn && jsondata.Program.IA.Kurser[i].kurskod == kurskod
-					&& jsondata.Program.IA.Kurser[i].timmar == timmar && jsondata.Program.IA.Kurser[i].period == period) {
-						if(confirm("Är du säker på att du vill ta bort " + kursnamn + " " + kurskod + " från listan över kurser?")) {	
-							jsondata.Program.IA.Kurser.splice(i, 1);
-							jsonDataText = JSON.stringify(jsondata);
-							localStorage.setItem("jsondata", jsonDataText);
-							this.forceUpdate();
-						}
+			let kursToRemove = document.getElementById("kursSelectDEL").value;
+			kursToRemove = kursToRemove.split("+");
+			const kursnamn = kursToRemove[0];
+			const kurskod = kursToRemove[1];
+			const timmar = kursToRemove[2];
+			const period = kursToRemove[3];
+			for(let i = 0; i < jsondata.Program.IA.Kurser.length; i++) {
+				if(jsondata.Program.IA.Kurser[i].namn == kursnamn && jsondata.Program.IA.Kurser[i].kurskod == kurskod
+				&& jsondata.Program.IA.Kurser[i].timmar == timmar && jsondata.Program.IA.Kurser[i].period == period) {
+					if(confirm("Är du säker på att du vill ta bort " + kursnamn + " " + kurskod + " från listan över kurser?")) {	
+						jsondata.Program.IA.Kurser.splice(i, 1);
+						jsonDataText = JSON.stringify(jsondata);
+						localStorage.setItem("jsondata", jsonDataText);
+						this.forceUpdate();
 					}
 				}
+			}
         }
 
 	
 		render() {
+			
             return (
 				<div>
 				<h1>Ta bort kurs</h1>
-                <select id="kursSelect">
+				<div>
+					<select name="" id="delcourse-select" onChange={this.toggleCoursesDel}>
+					<option value="IA">IA</option>
+					<option value="BDA">BDA</option>
+					</select>
+				</div>
+                <select id="kursSelectDEL">
                     {
                         jsondata.Program.IA.Kurser.map((iakurser, i) => {
                             return (
