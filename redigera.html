@@ -302,32 +302,37 @@
 			if (localStorage.getItem("jsondata") != null) {
 				jsonDataText = localStorage.getItem("jsondata");
 				jsondata = JSON.parse(jsonDataText);
-	}
+			}
 
-				this.state = {
+			this.state = {
 				isUpdated: false
-	}
-				updateState = updateState.bind(this)
-				this.removeKurs = this.removeKurs.bind(this)
-}
-	removeKurs() {
+			}
+			updateState = updateState.bind(this)
+			this.removeKurs = this.removeKurs.bind(this)
+		}
+
+		removeKurs() {
             	let kursToRemove = document.getElementById("kursSelect").value;
-            	kursToRemove = kursToRemove.split(" ");
-            	const kursnamn = kursToRemove[0];
+				kursToRemove = kursToRemove.split("+");
+				console.log(kursToRemove);
+				const kursnamn = kursToRemove[0];
+				console.log(kursnamn);
             	const kurskod = kursToRemove[1];
-            	const timmar = kursToRemove[2];
+				const timmar = kursToRemove[2];
+				console.log(timmar);
             	const period = kursToRemove[3];
             	for(let i = 0; i < jsondata.Program.IA.Kurser.length; i++) {
-                if(jsondata.Program.IA.Kurser[i].namn == kursnamn && jsondata.Program.IA.Kurser[i].kurskod == kurskod
-                && jsondata.Program.IA.Kurser[i].timmar == timmar && jsondata.Program.IA.Kurser[i].period == period) {
-                    if(confirm("Är du säker på att du vill ta bort " + kursnamn + " " + kurskod + " från listan över kurser?")) {						
-                        jsondata.Program.IA.Kurser.splice(i, 3);
-                        jsonDataText = JSON.stringify(jsondata);
-                        localStorage.setItem("jsondata", jsonDataText);
-                        this.forceUpdate();
-                    }
-                }
-            }
+					console.log(timmar == jsondata.Program.IA.Kurser[i].timmar);
+					if(jsondata.Program.IA.Kurser[i].namn == kursnamn && jsondata.Program.IA.Kurser[i].kurskod == kurskod
+					&& jsondata.Program.IA.Kurser[i].timmar == timmar && jsondata.Program.IA.Kurser[i].period == period) {
+						if(confirm("Är du säker på att du vill ta bort " + kursnamn + " " + kurskod + " från listan över kurser?")) {					
+							jsondata.Program.IA.Kurser.splice(i, 1);
+							jsonDataText = JSON.stringify(jsondata);
+							localStorage.setItem("jsondata", jsonDataText);
+							this.forceUpdate();
+						}
+					}
+				}
         }
 
 	
@@ -337,14 +342,13 @@
 				<h1>Ta bort kurs</h1>
                 <select id="kursSelect">
                     {
-                        jsondata.Program.IA.Kurser.map((kursn, i) => {
+                        jsondata.Program.IA.Kurser.map((iakurser, i) => {
                             return (
-                                <option key={i} value={kursn.kursnamn + " " + kursn.kurskod}>{kursn.kursnamn + " " + kursn.kurskod}</option>
+                                <option key={i} value={iakurser.namn + "+" + iakurser.kurskod + "+" + iakurser.timmar + "+" + iakurser.period }>{iakurser.namn + " " + iakurser.kurskod}</option>
                             ); 
                         })
                     }
                 </select>
-               
                 <input type="button" value="Ta bort" onClick={this.removeKurs}></input>
                 </div>
             );
