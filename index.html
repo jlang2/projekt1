@@ -233,55 +233,62 @@
 				let forskningsTitel = document.getElementById("forskning-titel");
 				let timantalForskning = document.getElementById("timantal-forskning");
 
-				if(jsondata.forskning[0] == undefined) {
+				if(forskningsTitel.value != "" && timantalForskning.value != "") {
+				
+
+					if(jsondata.forskning[0] == undefined) {
 
 
-					for(let i = 0; i < jsondata.Personal.length; i++) {
-						let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
-						if(namn == lektorNamn) {
-							if(jsondata.Personal[i].Timmar >= 1600) { // timantal check
-								alert(namn + " har redan maximala antal kurser/timmar.");
-								return;
-							} else {
-								if(jsondata.Personal[i].Timmar == undefined) {
-									jsondata.Personal[i].Timmar = parseInt(timantalForskning.value);
+						for(let i = 0; i < jsondata.Personal.length; i++) {
+							let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
+							if(namn == lektorNamn) {
+								if(jsondata.Personal[i].Timmar >= 1600) { // timantal check
+									alert(namn + " har redan maximala antal kurser/timmar.");
+									return;
 								} else {
-									jsondata.Personal[i].Timmar += parseInt(timantalForskning.value);
+									if(jsondata.Personal[i].Timmar == undefined) {
+										jsondata.Personal[i].Timmar = parseInt(timantalForskning.value);
+									} else {
+										jsondata.Personal[i].Timmar += parseInt(timantalForskning.value);
+									}
 								}
 							}
 						}
+
+						jsondata.forskning = [{
+							Lektor: lektorNamn,
+							Forskningsämne: forskningsTitel.value,
+							Timmar: parseInt(timantalForskning.value)
+						}];
+
+					} else {
+
+						for(let i = 0; i < jsondata.Personal.length; i++) {
+							let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
+							if(namn == lektorNamn) {
+								if(jsondata.Personal[i].Timmar >= 1600) { // timantal check
+									alert(namn + " har redan maximala antal kurser/timmar.");
+									return;
+								} else {
+									if(jsondata.Personal[i].Timmar == undefined) {
+										jsondata.Personal[i].Timmar = parseInt(timantalForskning.value);
+									} else {
+										jsondata.Personal[i].Timmar += parseInt(timantalForskning.value);
+									}
+								}
+							}
+						}
+
+						let objectToInsert = {
+							Lektor: lektorNamn,
+							Forskningsämne: forskningsTitel.value,
+							Timmar: parseInt(timantalForskning.value)
+						};
+						jsondata.forskning.push(objectToInsert);
 					}
-
-					jsondata.forskning = [{
-						Lektor: lektorNamn,
-						Forskningsämne: forskningsTitel.value,
-						Timmar: parseInt(timantalForskning.value)
-					}];
-
 				} else {
-
-					for(let i = 0; i < jsondata.Personal.length; i++) {
-						let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
-						if(namn == lektorNamn) {
-							if(jsondata.Personal[i].Timmar >= 1600) { // timantal check
-								alert(namn + " har redan maximala antal kurser/timmar.");
-								return;
-							} else {
-								if(jsondata.Personal[i].Timmar == undefined) {
-									jsondata.Personal[i].Timmar = parseInt(timantalForskning.value);
-								} else {
-									jsondata.Personal[i].Timmar += parseInt(timantalForskning.value);
-								}
-							}
-						}
-					}
-
-					let objectToInsert = {
-						Lektor: lektorNamn,
-						Forskningsämne: forskningsTitel.value,
-						Timmar: parseInt(timantalForskning.value)
-					};
-					jsondata.forskning.push(objectToInsert);
+					alert("Fyll i kurskningsämne och timantal.");
+					return;
 				}
 
 				forskningsTitel.value = "";

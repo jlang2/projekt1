@@ -13,69 +13,89 @@
 <div id="root"></div>
 	
 <script type="text/babel">
+
 	let jsonDataText;
 
 	function updateState(isUpdated) {
 		this.setState({isUpdated: !this.state.isUpdated})
 	}
 
-
 	class BDAKurser extends React.Component {
-		constructor() {
-			super()
 
+		constructor(props) {
+			super(props)
 			if (localStorage.getItem("jsondata") != null) {
 				jsonDataText = localStorage.getItem("jsondata");
 				jsondata = JSON.parse(jsonDataText);
 			}
+			this.state = {
+				test: jsondata.Program.BDA.Kurser[0].namn
+			}
+			this.updateState = this.updateState.bind(this)
+			updateEditCourseListBDA = updateEditCourseListBDA.bind(this)
+		}
+
+		updateState(event) {
+			let valdKurs = event.target.value;
+			let valdKursArray = valdKurs.split("+");
+			this.setState({test: valdKursArray[0]});
+			document.getElementById("change-kurs-namn").value = valdKursArray[0];
+			document.getElementById("change-kurs-id").value = valdKursArray[1];
+			document.getElementById("change-kurs-timmar").value = valdKursArray[2];
 		}
 
 		render() {
-			let exportKurs;
 			return (
 				<div>
-				<select id="kurserSelect">
-				<option value="default">Välj kurs</option>
+				<select id="kurserSelect" onChange={this.updateState}>
 					{
 						jsondata.Program.BDA.Kurser.map((bdakurser, i) => {
-							if(i == 0) {
-								exportKurs = bdakurser.namn;
-							}
-
+							
 							return (
-									<option key={i} value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn + " " + bdakurser.kurskod}</option>
+								<option key={i} value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn + " " + bdakurser.kurskod}</option>
 							);
 						})
 					}
 				</select>
-				<EditCourseData test={exportKurs} />
+				<EditCourseData kursNamn={this.state.test} program={this.props.IAorBDA} objectPath={jsondata.Program.BDA.Kurser} />
 				</div>
 			);
 		}
-    }
+}
+
+	let exportKurs;
  
 
 	class IAKurser extends React.Component {
 
-		constructor() {
-			super()
+		constructor(props) {
+			super(props)
 			if (localStorage.getItem("jsondata") != null) {
 				jsonDataText = localStorage.getItem("jsondata");
 				jsondata = JSON.parse(jsonDataText);
 			}
+			this.state = {
+				test: jsondata.Program.IA.Kurser[0].namn
+			}
+			this.updateState = this.updateState.bind(this)
+			updateEditCourseListIA = updateEditCourseListIA.bind(this)
+		}
+
+		updateState(event) {
+			let valdKurs = event.target.value;
+			let valdKursArray = valdKurs.split("+");
+			this.setState({test: valdKursArray[0]});
+			document.getElementById("change-kurs-namn").value = valdKursArray[0];
+			document.getElementById("change-kurs-id").value = valdKursArray[1];
+			document.getElementById("change-kurs-timmar").value = valdKursArray[2];
 		}
 
 		render() {
-			let exportKurs;
 			return (
 				<div>
-				<select id="kurserSelect">
-				<option value="default">Välj kurs</option>
+				<select id="kurserSelect" onChange={this.updateState}>
 					{
 						jsondata.Program.IA.Kurser.map((iakurser, i) => {
-							if(i == 0) {
-								exportKurs = iakurser.namn;
-							}
 							
 							return (
 								<option key={i} value={iakurser.namn + "+" + iakurser.kurskod + "+" + iakurser.timmar + "+" + iakurser.period }>{iakurser.namn + " " + iakurser.kurskod}</option>
@@ -83,7 +103,7 @@
 						})
 					}
 				</select>
-				<EditCourseData test={exportKurs} />
+				<EditCourseData kursNamn={this.state.test} program={this.props.IAorBDA} objectPath={jsondata.Program.IA.Kurser} />
 				</div>
 			);
 		}
@@ -332,15 +352,85 @@
     }
 
 
+	function updateEditCourseListIA(test) {
+		this.setState({
+			test: test
+		});
+	}
+
+	function updateEditCourseListBDA(test) {
+		this.setState({
+			test: test
+		});
+	}
 
 	class EditCourseData extends React.Component {
-		constructor() {
-			super()
+		constructor(props) {
+			super(props)
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+			this.updateKurs = this.updateKurs.bind(this)
+		}
+
+		updateKurs = (event) => {
+			let kursNamnToUpdate = event.target.parentElement.children[1].value;
+			let kursKodToUpdate = event.target.parentElement.children[3].value;
+			let timantalToUpdate = event.target.parentElement.children[5].value;
+			if(this.props.program == "IA") {
+				for(let i = 0; i < jsondata.Program.IA.Kurser.length; i++) {
+					if(jsondata.Program.IA.Kurser[i].namn == this.props.kursNamn) {
+						jsondata.Program.IA.Kurser[i].namn = kursNamnToUpdate;
+						jsondata.Program.IA.Kurser[i].kurskod = kursKodToUpdate;
+						jsondata.Program.IA.Kurser[i].timmar = timantalToUpdate;
+						jsonDataText = JSON.stringify(jsondata);
+						localStorage.setItem("jsondata", jsonDataText);
+						updateEditCourseListIA(kursNamnToUpdate); // uppdaterar state för BDAKurser och på samma gång this.props.kursNamn
+						return; // för att avbryta for-loopen när rätt kurs är hittad
+					}
+				}
+
+			} else if (this.props.program == "BDA") {
+				for(let i = 0; i < jsondata.Program.BDA.Kurser.length; i++) {
+					if(jsondata.Program.BDA.Kurser[i].namn == this.props.kursNamn) {
+						jsondata.Program.BDA.Kurser[i].namn = kursNamnToUpdate;
+						jsondata.Program.BDA.Kurser[i].kurskod = kursKodToUpdate;
+						jsondata.Program.BDA.Kurser[i].timmar = timantalToUpdate;
+						jsonDataText = JSON.stringify(jsondata);
+						localStorage.setItem("jsondata", jsonDataText);
+						updateEditCourseListBDA(kursNamnToUpdate); // uppdaterar state för BDAKurser och på samma gång this.props.kursNamn
+						return; // för att avbryta for-loopen när rätt kurs är hittad
+					}
+				}
+			}
+			
 		}
 
 		render() {
+			let changeKursKod;
+			let changeKursTimmar;
+			for(let counter = 0; counter < this.props.objectPath.length; counter++) {
+				if(this.props.kursNamn == this.props.objectPath[counter].namn) {
+					changeKursKod = this.props.objectPath[counter].kurskod;
+					changeKursTimmar = this.props.objectPath[counter].timmar;
+				}
+			}
+			
 			return (
-				<h2>{this.props.test}</h2>
+				<div>
+						
+					<p>Kursnamn</p>
+					<input id="change-kurs-namn" type="text" defaultValue={this.props.kursNamn}></input>
+			
+					<p>Kurskod</p>
+					<input id="change-kurs-id" type="text" defaultValue={changeKursKod}></input>
+			
+					<p>Timantal</p>
+					<input id="change-kurs-timmar" type="text" defaultValue={changeKursTimmar}></input>
+				
+					<input type="button" value="Ändra" onClick={this.updateKurs}></input>
+				</div>
 			)
 		}
 	}
@@ -370,9 +460,9 @@
 		render() {
 			let swth;
 			if(this.state.kurs == "IA") {
-				swth = <IAKurser />;
+				swth = <IAKurser IAorBDA={this.state.kurs} />;
 			} else if(this.state.kurs == "BDA") {
-				swth = <BDAKurser />;
+				swth = <BDAKurser IAorBDA={this.state.kurs} />;
 			}
 			return (
 				<div>
