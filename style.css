@@ -137,7 +137,7 @@ th#p4 {
 /*selector category css*/
 select#category {
   position: relative;
-  transform: translate(2%, 0%);
+  transform: translate(2%, 7%);
 }
 
 select#category {
@@ -184,7 +184,7 @@ select#category select option {
 
 select#kurserSelect {
   position: relative;
-  transform: translate(3%, 2%);
+  transform: translate(2%,7%);
 }
 
 select#kurserSelect {
@@ -230,7 +230,7 @@ select#kurserSelect select option {
 /*personalselect*/
 select#personalSelect {
   position: relative;
-  transform: translate(5.2%, 2%);
+  transform: translate(3.3%, 7%);
 }
 
 select#personalSelect {
@@ -310,7 +310,7 @@ p {
 /*personalselect*/
 select#personalSelect2 {
   position: relative;
-  transform: translate(2%, 0%);
+  transform: translate(2%, 1%);
 }
 
 select#personalSelect2 {
@@ -441,7 +441,7 @@ input#tabort {
   width: 85px;
   height: 38px;
   position:relative;
-  transform: translate(12%, 0%);
+  transform: translate(12%, -8%);
 
 }
 input#redigerandra {
@@ -549,13 +549,14 @@ select#kursSelect   select option {
 /*select kurs-select*/
 select#kurs-select{
   position: relative;
-  transform: translate(0.5%, 0%);
+  transform: translate(0%, 6%);
 }
 
 select#kurs-select  {
   background-color: rgba(251, 195, 90, 0.5);
   color: white;
   padding: 5px;
+  margin: 5px;
   width: 250px;
   border: none;
   font-size: 20px;
@@ -594,7 +595,7 @@ select#kurs-select   select option {
 /*selectperiod*/
 select#period{
   position: relative;
-  transform: translate(2%, 0%);
+  transform: translate(2%, 7%);
 }
 
 select#period  {
@@ -655,6 +656,8 @@ input#efternamn-input {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  position: relative;
+  transform: translate(1%, 0%);
 }
 input#kursnamn{
   width: 10%;
@@ -693,7 +696,7 @@ input#change-kurs-namn{
   box-sizing: border-box;
 }
 input#change-kurs-id{
-  width: 15%;
+  width: 25%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
