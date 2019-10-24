@@ -1,132 +1,541 @@
 html {
-  height: 100%;
-  background-color: rgba(251, 195, 90, 0.5);
-}
-body {
-  margin:2em;
-  padding: 1em;
-}
-section {
-  padding:10px 10px;
-  text-align: center;
-}
-ul {
-  padding: 10px 0;
-  background-color:rgb(255, 51, 0);
-  border: solid;  
-}
-li {
-  display: inline;
-  background-color:rgb(255, 51, 0);
-  padding: 10px;
-}
-li a {
-  color:white;
-  font-weight: bold;
-  padding:10px;
-  text-decoration: none;
-}
-li a:hover {
-    text-decoration: underline;
-}
-h1 {
+    background-color: rgba(251, 195, 90, 0.5);
+    width: 100%;
+    padding: 0px;
+  }
+  body {
+    width: 100%;
+    margin:auto;
+    padding: 0px;
+  }
+  section {
+    padding:10px 10px;
+    text-align: center;
+  }
+  
+  ul {
+    padding: 0;
+    margin: 0;
+    color:grey;
+    border: 2px black;
+  }
+  
+  li {
+    display: inline;
     padding: 10px;
-}
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  text-align: left;
-  padding: 10px;
-}
-table#t01 {
-  width: 100%;    
-  background-color: #f1f1c1;
-}
-tr:nth-child(even) {background-color: #fad59a85;}
-tr:hover {background-color: #ffd2a8;}
-/*BLOCK FÄRGER*/
-th#nmr1{
-  border-style: solid;
-}
-th#k1 {
-  border-style: solid;
-}
-th#p1 {
-  background-color:blue;
-}
-th#p2 {
-  background-color:red;
-}
-th#p3 {
-  background-color:orange;
+  }
+  
+  #navbar {
+    padding-bottom: 20px;
+  }
+  
+  h2 {
+      margin: 0em;
+  }
+  
+  
+  
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px;
+  }
+  table#t01 {
+    width: 100%;    
+    background-color: #f1f1c1;
+  }
+  tr:nth-child(even) {background-color: #fad59a85;}
+  tr:hover {background-color: #ffd2a8;}
+  /*BLOCK FÄRGER*/
+  th#nmr1{
+    border-style: solid;
+  }
+  th#k1 {
+    border-style: solid;
+  }
+  th#p1 {
+    background-color:blue;
+  }
+  th#p2 {
+    background-color:red;
+  }
+  th#p3 {
+    background-color:orange;
+  }
+  th#p4 {
+    background-color:yellow;
+  }
+  
+  /*DROP DOWN MENY*/
+  .dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  } 
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+  }
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  } 
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  .dropdown a:hover {background-color: #ddd;}
+  
+  .show {display: block;}
+  
+  #root {
+    padding-top: 15px;
+  }
+  
+  .delbtn{
+    border-radius: 8px;
+    background-color: white; 
+    color: black; 
+    border: 2px solid #f44336;
+  }
+  .delbtn:hover {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .table-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  
+  .table {
+    padding: 10px;
+  }
+  
+  #navbarid{
+    color:red;
+  }
+
+  /*selector category css*/
+  select#category {
+    position: relative;
+    transform: translate(2%, 0%);
+  }
+  
+  select#category {
+    background-color: rgba(251, 195, 90, 0.5);
+    color: white;
+    padding: 5px;
+    width: 100px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline-style: double;
+    outline-color: black;
+  }
+  
+  select#category ::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(251, 195, 90, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  select#category :hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  select#category select option {
+    padding: 30px;
+  }
+
+
+  /*kurserselect*/
+
+  select#kurserSelect {
+    position: relative;
+    transform: translate(5%, 0%);
+  }
+  
+  select#kurserSelect {
+    background-color: rgba(251, 195, 90, 0.5);
+    color: white;
+    padding: 5px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline-style: double;
+    outline-color: black;
+  }
+  
+  select#kurserSelect ::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(251, 195, 90, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  select#kurserSelect :hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  select#kurserSelect select option {
+    padding: 30px;
+  }
+
+
+  /*personalselect*/
+  select#personalSelect {
+    position: relative;
+    transform: translate(10%, 0%);
+  }
+  
+  select#personalSelect {
+    background-color: rgba(251, 195, 90, 0.5);
+    color: white;
+    padding: 5px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline-style: double;
+    outline-color: black;
+  }
+  
+  select#personalSelect ::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(251, 195, 90, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  select#personalSelect :hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  select#personalSelect select option {
+    padding: 30px;
+  }
+
+
+  /*BUTTON CSS*/
+
+input#button {
+    color:white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: #e6c772;
+    width: 85px;
+    height: 38px;
+    position:relative;
+    transform: translate(40%, 0%);
 
 }
-th#p4 {
-  background-color:yellow;
+
+/*navbar*/
+div#navbar {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 10px 0;
+    background-color: rgba(251, 195, 90, 0.5);
+    border: solid burlywood;
+    text-align: center; 
+    position:relative;
+    
 }
 
-/*forskning spalt css*/
-select#forskkkSelect {
-  position:relative;
-  top: -20px;
-  left:400px;
-}
-/*hours spalten*/
-input#hours
-{
-  position:relative;
-  right: 450px;
-}
-/*forskning textbox*/
+/*CSS redigera.html selectors*/
+  /*personalselect*/
+  select#personalSelect2 {
+    position: relative;
+    transform: translate(2%, 0%);
+  }
+  
+  select#personalSelect2 {
+    background-color: rgba(251, 195, 90, 0.5);
+    color: white;
+    padding: 5px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline-style: double;
+    outline-color: black;
+  }
+  
+  select#personalSelect2 ::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(251, 195, 90, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  select#personalSelect2 :hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  select#personalSelect2 select option {
+    padding: 30px;
+  }
 
+  /*kursselect*/
 
+  select#kurserSelect2 {
+    position: relative;
+    transform: translate(2%, 0%);
+  }
+  
+  select#kurserSelect2 {
+    background-color: rgba(251, 195, 90, 0.5);
+    color: white;
+    padding: 5px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline-style: double;
+    outline-color: black;
+  }
+  
+  select#kurserSelect2 ::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(251, 195, 90, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  select#kurserSelect2 :hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  select#kurserSelect2 select option {
+    padding: 30px;
+  }
 
-/*DROP DOWN MENY*/
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-} 
+  /*button*/
+  input#buttonlektor {
+    color:white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: #e6c772;
+    width: 85px;
+    height: 38px;
+    position:relative;
+    transform: translate(12%, 0%);
 
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
 }
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-} 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.dropdown a:hover {background-color: #ddd;}
+input#laggtill {
+    color:white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: #e6c772;
+    width: 85px;
+    height: 38px;
+    position:relative;
+    transform: translate(12%, 0%);
 
-.show {display: block;}
-
-#root {
-  padding-top: 15px;
-}
-#rows-parent{
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  grid-row-gap: 1em;
-  grid-column-gap: 5px;
-  padding: 10px;
 }
 
+input#laggkurs {
+    color:white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: #e6c772;
+    width: 85px;
+    height: 38px;
+    position:relative;
+    transform: translate(12%, 0%);
+
+}
+input#tabort {
+    color:white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: #e6c772;
+    width: 85px;
+    height: 38px;
+    position:relative;
+    transform: translate(12%, 0%);
+
+}
+input#redigerandra {
+    color:white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: #e6c772;
+    width: 85px;
+    height: 38px;
+    position:relative;
+    transform: translate(12%, 0%);
+
+}
+
+/*redigerakurs selector*/
+select#editcourse-select {
+    position: relative;
+    transform: translate(2%, 0%);
+  }
+  
+  select#editcourse-select  {
+    background-color: rgba(251, 195, 90, 0.5);
+    color: white;
+    padding: 5px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline-style: double;
+    outline-color: black;
+  }
+  
+  select#editcourse-select  ::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(251, 195, 90, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  select#editcourse-select  :hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  select#editcourse-select  select option {
+    padding: 30px;
+  }
+  
+  /*tabort kurs selector*/
+  select#kursSelect{
+    position: relative;
+    transform: translate(2%, 0%);
+  }
+  
+  select#kursSelect  {
+    background-color: rgba(251, 195, 90, 0.5);
+    color: white;
+    padding: 5px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline-style: double;
+    outline-color: black;
+  }
+  
+  select#kursSelect  ::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(251, 195, 90, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  select#kursSelect   :hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  select#kursSelect   select option {
+    padding: 30px;
+  }
