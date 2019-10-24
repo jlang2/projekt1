@@ -169,7 +169,7 @@
 					<h1>Lägg till lektor</h1>
 					<input type="text" id="fornamn-input" placeholder="Förnamn"></input>
 					<input type="text" id="efternamn-input" placeholder="Efternamn"></input>
-					<input type="button" value="Lägg till" onClick={this.addLektor}></input>
+					<input type="button" id="buttonlektor" value="Lägg till" onClick={this.addLektor}></input>
 				</div>
 				
 			);
@@ -193,7 +193,7 @@
 		}
 
 		removeLektor() {
-			let lektorToRemove = document.getElementById("personalSelect").value;
+			let lektorToRemove = document.getElementById("personalSelect2").value;
 			lektorToRemove = lektorToRemove.split(" ");
 			const fornamn = lektorToRemove[0];
 			const efternamn = lektorToRemove[1];
@@ -213,7 +213,7 @@
 			return (
 				<div>
 				<h1>Ta bort lektor</h1>
-				<select id="personalSelect">
+				<select id="personalSelect2">
 					{
 						jsondata.Personal.map((person, i) => {
 							return (
@@ -222,7 +222,7 @@
 						})
 					}
 				</select>
-				<input type="button" value="Ta bort" onClick={this.removeLektor}></input>
+				<input type="button" id="tabort" value="Ta bort" onClick={this.removeLektor}></input>
 				</div>
 			);
 		}
@@ -294,7 +294,7 @@
 						<option value="3">3</option>
 						<option value="4">4</option>
 					</select>
-					<input type="button" value="Lägg till" onClick={this.addCourse}></input>
+					<input type="button" id="laggkurs" value="Lägg till" onClick={this.addCourse}></input>
 				</div>
 			)
 		}
@@ -351,7 +351,7 @@
                         })
                     }
                 </select>
-                <input type="button" value="Ta bort" onClick={this.removeKurs}></input>
+                <input type="button" id="tabort" value="Ta bort" onClick={this.removeKurs}></input>
                 </div>
             );
         }
@@ -435,7 +435,7 @@
 					<p>Timantal</p>
 					<input id="change-kurs-timmar" type="text" defaultValue={changeKursTimmar}></input>
 				
-					<input type="button" value="Ändra" onClick={this.updateKurs}></input>
+					<input type="button" id="redigerandra" value="Ändra" onClick={this.updateKurs}></input>
 				</div>
 			)
 		}
