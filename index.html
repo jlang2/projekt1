@@ -1,242 +1,719 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Project 1</title>
-        <script src="https://unpkg.com/react@16.9.0/umd/react.development.js"></script>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="https://unpkg.com/react@16.9.0/umd/react.development.js"></script>
         <script src="https://unpkg.com/react-dom@16.9.0/umd/react-dom.development.js"></script>
-        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-        <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-    </head>
-    <body>
-        <!--<div id="demo">Ursprungliga text</div>
-        <script type="text/babel">
-            function Welcome(props) {
-                return <div><h1>Hello {props.name}!</h1></div>;
-            }
-            function App(){
-                return (
-                    <div>
-                        <Welcome name="Sebastian" />
-                        <Welcome name="Skurk" />
-                    </div>
-                );
-            }
-            ReactDOM.render(                                                        //(komponent,hook), reactDOM är virtuell, render metoden skapar "riktiga" DOM
-                <App />,                                                        
-                document.getElementById("demo")                                     //en div sim heter root är tyypiskt react
-            );
-        </script>-->
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script src="resurs.js"></script>
+	<link rel="stylesheet" href="style.css" type="text/css" charset="utf-8">
+</head>
+<body>
+<div id="root"></div>
+	
+<script type="text/babel">
 
-<!--DROP DOWN MENY-->
+	let jsonDataText;
+	let kursSwitch = 0;
 
-<h1>Projekt 1 Demo</h1>
+	function updateState(isUndefined) {
+		isUndefined = true;
+    	this.setState({isUndefined: isUndefined});
+	}
 
-<!--<div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="#si">si</a>
-    <a href="#dig">dig</a>
-    <a href="#iröven">iröven</a>
-  </div>
-</div>
+	function updateStateForskning(isUndefined) {
+		isUndefined = true;
+    	this.setState({isUndefined: isUndefined});
+	}
 
-SCRIPT FÖR DROPDOWN MENY-->
-<!--<script>
-        /* When the user clicks on the button, 
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-        
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-          if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-              var openDropdown = dropdowns[i];
-              if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-              }
-            }
-          }
-        }
-        </script>
-      -->
-      <body onload="filterOptions()">
-        <div id="root"></div>
-        <script charset="utf-8">
-          
-        function filterOptions() {
-          
-          var categorySelect = document.getElementById("category");
-          categorySelect.addEventListener("change", filterOptions);
-          var courseSelect = document.getElementById("courseSelect");
-          courseSelect.value = "default";
-          if(categorySelect.value == "BDA") {
-            for(var i = 0; i < courseSelect.length; i++) {
-              if(courseSelect.children[i].value == "BDA") {
-                courseSelect.children[i].style.display = "block";
-              } else if(courseSelect.children[i].value == "IT-Bachelor") {
-                courseSelect.children[i].style.display = "none";
-              }
-            }
-          } else if(categorySelect.value == "IT-Bachelor") {
-            for(var i = 0; i < courseSelect.length; i++) {
-              if(courseSelect.children[i].value == "IT-Bachelor") {
-                courseSelect.children[i].style.display = "block";
-              } else if(courseSelect.children[i].value == "BDA") {
-                courseSelect.children[i].style.display = "none";
-              }
-            }
-          }
-        }
-        </script>
-        
-        <script type="text/babel">
-          
-                    function App(){
-                        return (
-              <div id="dropdowndiv">
-              <select id="teachers" name="teachers">
-                <option value="teacher1">teacher1</option>
-                <option value="teacher2">teacher2</option>
-              </select>
-              <select id="category" name="category">
-                <option value="BDA">BDA</option>
-                <option value="IT-Bachelor">IT-Bachelor</option>
-              </select>
-              <select id="courseSelect" name="courseSelect">
-                <option value="default">Välj Kurs</option>
-                <option value="IT-Bachelor">kurs1</option>
-                <option value="IT-Bachelor">kurs2</option>
-                <option value="BDA">kurs3</option>
-                <option value="BDA">kurs4</option>
-                <option value="BDA">kurs5</option>
-              </select>
-              <input type="text" name="hours" id="hours" placeholder="Timantal" defaultValue=""></input>
-              <input type="submit" name="submit" id="submit" value="Skicka"></input>
-              </div>
-                        );
-                    }
-                    ReactDOM.render(       //(komponent,hook), reactDOM är virtuell, render metoden skapar "riktiga" DOM
-                      <App />,                                                        
-                      document.getElementById("root")     //en div sim heter root är tyypiskt react
-                  );
-        </script>
+	function handleUpdate() {
+		this.forceUpdate();
+	}
 
-<!--table för att sortera shittii-->
-<table id="idtable" style="width:100%">
+	function updateForskning() {
+		this.forceUpdate();
+	}
 
-    <tr id="tr1">
-      <th id="nmr1">#</th>      
-      <th id="k1">Kurser/Forskning</th>
-      <th id="p1">P1</th> 
-      <th id="p2">P2</th>
-      <th id ="p3">P3</th>
-      <th id="p4">P4</th>
+	function NavBar() {
+		return (
+			<div id="navbar">
+				<ul>
+					<a id="navbarid" href="">
+						<li><b>Kursväljaren</b></li>
+					</a>
+					<a href="redigera.html">
+						<li><b>Redigera</b></li>
+					</a>
+				</ul>
+			</div>
+			
+		)
+	}
+
+  	class SelectContainer extends React.Component {
+		constructor() {
+			super()
+			this.state = {
+        		isHidden: "BDA"
+			}
+		}
+		
+		toggleHidden() {
+			const category = document.getElementById("category");
+			if(category.value == "BDA") {
+				kursSwitch = 0;
+				this.setState({
+					isHidden: "BDA"
+				})
+			} else if(category.value == "IT-Bachelor") {
+				kursSwitch = 1;
+				this.setState({
+					isHidden: "IA"
+				})
+			} else if(category.value == "forskning") {
+				kursSwitch = 2;
+				this.setState({
+					isHidden: "Forskning"
+				})
+			}
+      	}
       
-    </tr>
+		render() {
+			let kurser;
+			if(this.state.isHidden == "BDA") {
+				kurser = <BDAKurser />;
+			} else if(this.state.isHidden == "IA") {
+				kurser = <IAKurser />;
+			} else if(this.state.isHidden == "Forskning") {
+				kurser = <Forskning />;
+			}
+			return (
+        		<div>
+          			<select id="category" name="category" onChange={this.toggleHidden.bind(this)}>
+						<option value="BDA">BDA</option>
+						<option value="IT-Bachelor">IT-Bachelor</option>		
+						<option value="forskning">Forskning</option>			
+					</select>
+					{kurser}
+					<Personal />
+					<Send />
+				</div>
+			)
+		}
+    }
 
-    <tr>
-      <td>1</td>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <td></td>
-      
-    </tr>
+	class Forskning extends React.Component {
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+		}
 
-    <tr>
-      <td>2</td>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <td></td>
-      
-    </tr>
+		render() {
+			return (
+				<div>
+					<input type="text" id="forskning-titel" placeholder="Forskningsämne"></input>
+					<input type="text" id="timantal-forskning" placeholder="Timantal"></input>
+				</div>
+				
+			)
+		}
+	}
 
-    <tr>
-      <td>3</td>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <td></td>
-      
-    </tr>
+	class BDAKurser extends React.Component {
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+		}
 
-    <tr>
-      <td>4</td>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <td></td>
-      
-    </tr>
+		render() {
+			return (
+				<select id="kurserSelect">
+					{
+						jsondata.Program.BDA.Kurser.map((bdakurser, i) => {
 
-    <tr>
-        <td>5</td>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <td></td>
-        
-    </tr>
+							if(jsondata.active != undefined) {
+								for(let counter = 0; counter < jsondata.active.length; counter++) {
+									if(jsondata.active[counter].Kurs == bdakurser.namn) { // checkar om kursen redan är vald
+										return; // isåfall renderera inte
+									}
+								}
+							}
+							
+							return (
+								<option key={i} value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn + " " + bdakurser.kurskod}</option>
+							);
+						})
+					}
+				</select>
+			);
+		}
+    }
+ 
 
-    <tr>
-        <td>6</td>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <td></td>
-        
-    </tr>
+	class IAKurser extends React.Component {
 
-    <tr>
-        <td>7</td>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <td></td>
-        
-    </tr>
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+		}
+
+		render() {
+			return (
+				<select id="kurserSelect">
+					{
+						jsondata.Program.IA.Kurser.map((iakurser, i) => {
+							if(jsondata.active != undefined) {
+								for(let counter = 0; counter < jsondata.active.length; counter++) {
+									if(jsondata.active[counter].Kurs == iakurser.namn) { // checkar om kursen redan är vald
+										return; // isåfall renderera inte
+									}
+								}
+							}
+							
+							return (
+								<option key={i} value={iakurser.namn + "+" + iakurser.kurskod + "+" + iakurser.timmar + "+" + iakurser.period }>{iakurser.namn + " " + iakurser.kurskod}</option>
+							);
+						})
+					}
+				</select>
+			);
+		}
+	}
+	
+	class Personal extends React.Component {
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+		}
+		render() {
+			return (
+				<select id="personalSelect">
+					{
+						jsondata.Personal.map((person, i) => {
+							return (
+								<option key={i} value={person.Förnamn + " " + person.Efternamn}>{person.Förnamn + " " + person.Efternamn}</option>
+							);	
+						})
+					}
+				</select>
+			);
+		}
+	}
+
+	class Send extends React.Component {
+		constructor() {
+			super();
+			this.dataToJson = this.dataToJson.bind(this);
+		}
+		
+		dataToJson() {
+			if(jsondata.forskning == undefined) {
+				jsondata.forskning = [];
+			}
+
+			const lektorNamn = personalSelect.value;
+
+			if(kursSwitch == 2) { // Om man valt forskning
+				
+				
+
+				let forskningsTitel = document.getElementById("forskning-titel");
+				let timantalForskning = document.getElementById("timantal-forskning");
+
+				if(forskningsTitel.value != "" && timantalForskning.value != "") {
+				
+
+					if(jsondata.forskning[0] == undefined) {
+
+
+						for(let i = 0; i < jsondata.Personal.length; i++) {
+							let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
+							if(namn == lektorNamn) {
+								if(jsondata.Personal[i].Timmar >= 1600) { // timantal check
+									alert(namn + " har redan maximala antal kurser/timmar.");
+									return;
+								} else {
+									if(jsondata.Personal[i].Timmar == undefined) {
+										jsondata.Personal[i].Timmar = parseInt(timantalForskning.value);
+									} else {
+										jsondata.Personal[i].Timmar += parseInt(timantalForskning.value);
+									}
+								}
+							}
+						}
+
+						jsondata.forskning = [{
+							Lektor: lektorNamn,
+							Forskningsämne: forskningsTitel.value,
+							Timmar: parseInt(timantalForskning.value)
+						}];
+
+					} else {
+
+						for(let i = 0; i < jsondata.Personal.length; i++) {
+							let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
+							if(namn == lektorNamn) {
+								if(jsondata.Personal[i].Timmar >= 1600) { // timantal check
+									alert(namn + " har redan maximala antal kurser/timmar.");
+									return;
+								} else {
+									if(jsondata.Personal[i].Timmar == undefined) {
+										jsondata.Personal[i].Timmar = parseInt(timantalForskning.value);
+									} else {
+										jsondata.Personal[i].Timmar += parseInt(timantalForskning.value);
+									}
+								}
+							}
+						}
+
+						let objectToInsert = {
+							Lektor: lektorNamn,
+							Forskningsämne: forskningsTitel.value,
+							Timmar: parseInt(timantalForskning.value)
+						};
+						jsondata.forskning.push(objectToInsert);
+					}
+				} else {
+					alert("Fyll i kurskningsämne och timantal.");
+					return;
+				}
+
+				forskningsTitel.value = "";
+				timantalForskning.value = "";
+				
+			} else {
+				if(jsondata.active == undefined) {
+					jsondata.active = new Object();
+				}
+				const kursArray = kurserSelect.value.split("+");
+
+
+				if(jsondata.active[0] == undefined) {
+
+					for(let i = 0; i < jsondata.Personal.length; i++) {
+						let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
+						if(namn == lektorNamn) {
+							if(jsondata.Personal[i].Timmar >= 1600 || jsondata.Personal[i].Kursantal >= 11) { // timantal och kursantal check
+								alert(namn + " har redan maximala antal kurser/timmar.");
+								return;
+							} else {
+								if(jsondata.Personal[i].Timmar == undefined) {
+									jsondata.Personal[i].Timmar = parseInt(kursArray[2]);
+									jsondata.Personal[i].Kursantal = 1;
+								} else {
+									jsondata.Personal[i].Timmar += parseInt(kursArray[2]);
+									jsondata.Personal[i].Kursantal++;
+								}
+							}
+						}
+					}
+
+					jsondata.active = [{
+						Lektor: lektorNamn,            
+						Kurs: kursArray[0],
+						Kurskod: kursArray[1],
+						Timmar: kursArray[2],
+						Period: kursArray[3]
+					}];
+
+				} else {
+					for(let i = 0; i < jsondata.active.length; i++) {
+
+						if(jsondata.active[i].Kurs == kursArray[0]) {
+							alert("Någon har redan valt denna kurs.");
+							return;
+						}
+					}
+
+					for(let i = 0; i < jsondata.Personal.length; i++) {
+						let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
+						if(namn == lektorNamn) {
+							if(jsondata.Personal[i].Timmar >= 1600 || jsondata.Personal[i].Kursantal >= 11) { // timantal och kursantal check
+								alert(namn + " har redan maximala antal kurser/timmar.");
+								return;
+							} else {
+								if(jsondata.Personal[i].Timmar == undefined) {
+									jsondata.Personal[i].Timmar = parseInt(kursArray[2]);
+									jsondata.Personal[i].Kursantal = 1;
+								} else {
+									jsondata.Personal[i].Timmar += parseInt(kursArray[2]);
+									jsondata.Personal[i].Kursantal++;
+								}
+							}
+						}
+					}
+
+					jsondata.active.push({
+						Lektor: lektorNamn,
+						Kurs: kursArray[0],
+						Kurskod: kursArray[1],
+						Timmar: kursArray[2],
+						Period: kursArray[3]
+					});
+				}
+			}
+			jsonDataText = JSON.stringify(jsondata);
+			localStorage.setItem("jsondata", jsonDataText);
+		}
+
+		wrapperFunction = () => {
+			this.dataToJson();
+			if(jsondata.forskning[0] != undefined) {
+				updateStateForskning();
+			}
+			if(jsondata.active[0] != undefined) {
+				updateState();
+			}
+			handleUpdate();
+			updateForskning();
+		}
+			
+			render() {
+				return (
+					<input type="button" name="button" id="button" onClick={this.wrapperFunction} value="Skicka"></input>
+				);
+			}
+    }
+	
+
+    
+	class TableData extends React.Component {
+		constructor() {
+			super()
+				if (localStorage.getItem("jsondata") != null) {
+					jsonDataText = localStorage.getItem("jsondata");
+					jsondata = JSON.parse(jsonDataText);
+				}
+			this.deleteRow = this.deleteRow.bind(this);
+		}
+
+		wrapperFunction = () => {
+			this.deleteRow(event);
+			handleUpdate();
+		}
+
+
+		deleteRow(event) { // funktion för att ta bort rader
+			let timmar;
+			const id = event.target.id; // tar id för knappen man tryckt på
+			const element = document.getElementById(id);
+			const row = element.parentElement.parentElement.children;
+			const lektor = row[0].firstChild.data; // data som visas i tabellen
+			const kurs = row[1].firstChild.data; // data som visas i tabellen
+			for(let i = 0; i < jsondata.active.length; i++) { // loop för att hitta värdet i jsondata.active som korresponderar med värdet i tabellen
+				if(jsondata.active[i].Kurs == kurs) {
+					timmar = jsondata.active[i].Timmar; // 1.0. sparar timmar för kursen i variabel
+					jsondata.active.splice(i, 1); // tar bort värde ur jsondata.active vid position i
+				}
+			}
+			for(let i = 0; i < jsondata.Personal.length; i++) { // loop för att hitta namnet i jsondata.Personal som korresponderar med namnet i tabellen
+						let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
+						if(namn == lektor) { // const lektor = row[0].firstChild.data;
+							jsondata.Personal[i].Timmar -= timmar; // 1.1. tar bort timmar för kursen i 1.0. från timantalet
+							jsondata.Personal[i].Kursantal--;
+						}
+					}
+			jsonDataText = JSON.stringify(jsondata);
+			localStorage.setItem("jsondata", jsonDataText);
+			this.forceUpdate();
+		}
+
+		render () {
+			return (
+				jsondata.active.map((x, i) => {
+					let id = "row" + i;
+					let remove = "remove" + i;
+					if (x.Period == 1){
+						return (
+							<tr key={i} id={id}>
+								<td>{x.Lektor}</td>
+								<td>{x.Kurs}</td>
+								<td>{x.Kurskod}</td>
+								<td>1</td>
+								<td><input type="button" name="button" id={remove} onClick={this.wrapperFunction} value="X"></input></td>
+							</tr>
+						);
+					}
+			
+							
+					if (x.Period == 2){
+						return (
+							<tr key={i} id={id}>
+								<td>{x.Lektor}</td>
+								<td>{x.Kurs}</td>
+								<td>{x.Kurskod}</td>
+								<td>2</td>
+								<td><input type="button" name="button" id={remove} onClick={this.wrapperFunction} value="X"></input></td>
+							</tr>
+						);
+					}
+
+					if (x.Period == 3){
+						return (
+							<tr key={i} id={id}>
+								<td>{x.Lektor}</td>
+								<td>{x.Kurs}</td>
+								<td>{x.Kurskod}</td>
+								<td>3</td>
+								<td><input type="button" name="button" id={remove} onClick={this.wrapperFunction} value="X"></input></td>
+							</tr>
+						);
+					} else {
+						return (
+							<tr key={i} id={id}>
+								<td>{x.Lektor}</td>
+								<td>{x.Kurs}</td>
+								<td>{x.Kurskod}</td>
+								<td>4</td>
+								<td><input type="button" name="button" id={remove} onClick={this.wrapperFunction} value="X"></input></td>
+							</tr>
+						);
+					}
+				})	
+			)
+		}
+	}
+
+	class ForskningTableData extends React.Component {
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+			this.deleteRow = this.deleteRow.bind(this)
+		}
+
+		wrapperFunction = () => {
+			this.deleteRow(event);
+			handleUpdate();
+		}
+
+		deleteRow(event) { // funktion för att ta bort rader
+			let timmar;
+			const id = event.target.id; // tar id för knappen man tryckt på
+			const element = document.getElementById(id);
+			const row = element.parentElement.parentElement.children;
+			const lektor = row[0].firstChild.data; // data som visas i tabellen
+			const topic = row[1].firstChild.data; // data som visas i tabellen
+			for(let i = 0; i < jsondata.forskning.length; i++) { // loop för att hitta värdet i jsondata.active som korresponderar med värdet i tabellen
+				if(jsondata.forskning[i].Forskningsämne == topic) {
+					timmar = jsondata.forskning[i].Timmar; // 1.0. sparar timmar för kursen i variabel
+					jsondata.forskning.splice(i, 1); // tar bort värde ur jsondata.active vid position i
+				}
+			}
+			for(let i = 0; i < jsondata.Personal.length; i++) { // loop för att hitta namnet i jsondata.Personal som korresponderar med namnet i tabellen
+						let namn = jsondata.Personal[i].Förnamn + " " + jsondata.Personal[i].Efternamn;
+						if(namn == lektor) { // const lektor = row[0].firstChild.data;
+							jsondata.Personal[i].Timmar -= timmar; // 1.1. tar bort timmar för kursen i 1.0. från timantalet
+						}
+					}
+			jsonDataText = JSON.stringify(jsondata);
+			localStorage.setItem("jsondata", jsonDataText);
+			this.forceUpdate();
+		}
+
+		render() {
+			return (
+				jsondata.forskning.map((x, i) => {
+					let removef = "removef" + i;
+					return (
+						<tr key={i}>
+							<td>{x.Lektor}</td>
+							<td>{x.Forskningsämne}</td>
+							<td>{x.Timmar + "h"}</td>
+							<td><input type="button" name="button" id={removef} onClick={this.wrapperFunction} value="X"></input></td>
+						</tr>
+					);
+				})
+			)
+		}
+	}
+
+	class ForskningTable extends React.Component {
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+
+			if(jsondata.forskning == undefined) {
+				jsondata.forskning = new Object();
+			}
+
+			if(jsondata.forskning[0] == undefined) {
+				this.state = {
+					isUndefined: false
+				}
+			} else {
+				this.state = {
+					isUndefined: true
+				}
+			}
+
+			updateStateForskning = updateStateForskning.bind(this)
+			updateForskning = updateForskning.bind(this)
+		}
+
+		render () {
+			return (
+				<table> 
+					<tbody>
+						<tr>
+							<th>Lektor</th>
+							<th>Forskningsämne</th>
+							<th>Timantal</th>
+						</tr>
+						{this.state.isUndefined && <ForskningTableData />}
+					</tbody>
+				</table>
+			)
+		}
+	}
+
+	class HourTableData extends React.Component {
+		constructor() {
+			super()
+				if (localStorage.getItem("jsondata") != null) {
+					jsonDataText = localStorage.getItem("jsondata");
+					jsondata = JSON.parse(jsonDataText);
+				}
+		}
+
+		render () {
+			return (
+				jsondata.Personal.map((x, i) => {
+					if(x.Timmar != undefined && x.Timmar != 0) {
+					return (
+						<tr key={i}>
+							<td>{x.Förnamn + " " + x.Efternamn}</td>
+							<td>{x.Timmar + "h"}</td>
+							<td>{x.Kursantal}</td>
+						</tr>
+					);
+					}
+				})
+			)
+		}
+	}
+
+	class HourTable extends React.Component {
+
+		constructor(props) {
+			super(props)
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			} else {
+				jsondata.active = new Object();
+			}
+			handleUpdate = handleUpdate.bind(this)
+		}
+
+		render () {
+			return (
+				<table> 
+					<tbody>
+						<tr>
+							<th>Lektor</th>
+							<th>Timantal</th>
+							<th>Kursantal</th>
+						</tr>
+						<HourTableData />
+					</tbody>
+				</table>
+			)
+		}
+	}
+   
+	// kurser
+	class Table extends React.Component {
+		constructor(props) {
+			super(props)
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			} 
+
+			if(jsondata.active == undefined) {
+				jsondata.active = new Object();
+			}
+
+			if(jsondata.active[0] == undefined) {
+				this.state = {
+					isUndefined: false
+				}
+			} else {
+				this.state = {
+					isUndefined: true
+				}
+			}
+			updateState = updateState.bind(this)
+		}
+
+		render () {
+			return (
+				<table id="idtable"> 
+					<tbody>
+						<tr id="tr1">
+							<th>Lektor</th>
+							<th>Kurs</th>
+							<th>Kurskod</th>
+							<th>Period</th>
+						</tr>
+						{this.state.isUndefined && <TableData />}
+					</tbody>
+				</table>
+			)
+		}
+    }
+    
+	class Container extends React.Component {
+		render () {
+			return (
+				<div className="table-container">
+					<div className="table">
+						<Table />
+					</div>
+					<div className="table">
+						<ForskningTable />
+					</div>
+					<div className="table">
+						<HourTable />
+					</div>
+				</div>
+			)
+		}
+	}
+
+	ReactDOM.render(
+		<div id="container-main">
+			<NavBar />
+			<SelectContainer />
+			<Container />
+		</div>,
+		document.getElementById("root")
+	);
+
+
+</script>
 
 
 
-
-  </table>
-  <br>
-
-  <!--
-  <table id="t01">
-    <tr>
-      <th>Firstname</th>
-      <th>Lastname</th> 
-      <th>Age</th>
-    </tr>
-    <tr>
-      <td>Jill</td>
-      <td>Smith</td>
-      <td>50</td>
-    </tr>
-    <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Doe</td>
-      <td>80</td>
-    </tr>
-  </table>
--->
-    </body>
+<br>
+</body>
 </html>
