@@ -312,27 +312,15 @@
 			this.state = {
 				kurs: "IA"
 			}
-			this.toggleCoursesDel = this.toggleCoursesDel.bind(this)
-		
+					
 			updateState = updateState.bind(this)
 			this.removeKurs = this.removeKurs.bind(this)
 			updateRemoveFromAdd = updateRemoveFromAdd.bind(this)
 		}
-		toggleCoursesDel() {
-			const delCourseSelect = document.getElementById("delcourse-select");
-			if(delCourseSelect.value == "BDA") {
-				this.setState({
-					kurs: "BDA"
-				})
-			} else if(delCourseSelect.value == "IA") {
-				this.setState({
-					kurs: "IA"
-				})
-			}
-		}
+		
 
 		removeKurs() {
-			let kursToRemove = document.getElementById("kursSelectDEL").value;
+			let kursToRemove = document.getElementById("kursSelect").value;
 			kursToRemove = kursToRemove.split("+");
 			const kursnamn = kursToRemove[0];
 			const kurskod = kursToRemove[1];
@@ -356,14 +344,9 @@
 			
             return (
 				<div>
-				<h1>Ta bort kurs</h1>
-				<div>
-					<select name="" id="delcourse-select" onChange={this.toggleCoursesDel}>
-					<option value="IA">IA</option>
-					<option value="BDA">BDA</option>
-					</select>
-				</div>
-                <select id="kursSelectDEL">
+				<h1>Ta bort kurs från IA</h1>
+				
+                <select id="kursSelect">
                     {
                         jsondata.Program.IA.Kurser.map((iakurser, i) => {
                             return (
@@ -378,6 +361,67 @@
         }
     }
 
+
+
+	class RemoveCourseBDA extends React.Component {
+		
+		constructor() {
+			super()
+			if (localStorage.getItem("jsondata") != null) {
+				jsonDataText = localStorage.getItem("jsondata");
+				jsondata = JSON.parse(jsonDataText);
+			}
+
+			this.state = {
+				kurs: "BDA"
+			}
+					
+			updateState = updateState.bind(this)
+			this.removeKurs = this.removeKurs.bind(this)
+			updateRemoveFromAdd = updateRemoveFromAdd.bind(this)
+		}
+		
+		removeKurs() {
+			let kursToRemove = document.getElementById("kursSelectDELbda").value;
+			kursToRemove = kursToRemove.split("+");
+			const kursnamn = kursToRemove[0];
+			const kurskod = kursToRemove[1];
+			const timmar = kursToRemove[2];
+			const period = kursToRemove[3];
+			for(let i = 0; i < jsondata.Program.BDA.Kurser.length; i++) {
+				if(jsondata.Program.BDA.Kurser[i].namn == kursnamn && jsondata.Program.BDA.Kurser[i].kurskod == kurskod
+				&& jsondata.Program.BDA.Kurser[i].timmar == timmar && jsondata.Program.BDA.Kurser[i].period == period) {
+					if(confirm("Är du säker på att du vill ta bort " + kursnamn + " " + kurskod + " från listan över kurser?")) {	
+						jsondata.Program.BDA.Kurser.splice(i, 1);
+						jsonDataText = JSON.stringify(jsondata);
+						localStorage.setItem("jsondata", jsonDataText);
+						this.forceUpdate();
+					}
+				}
+			}
+        }
+
+	
+		render() {
+			
+            return (
+				<div>
+				<h1>Ta bort kurs från BDA</h1>
+				
+                <select id="kursSelectDELbda">
+                    {
+                        jsondata.Program.BDA.Kurser.map((bdakurser, i) => {
+                            return (
+                                <option key={i} value={bdakurser.namn + "+" + bdakurser.kurskod + "+" + bdakurser.timmar + "+" + bdakurser.period }>{bdakurser.namn + " " + bdakurser.kurskod}</option>
+                            ); 
+                        })
+                    }
+                </select>
+                <input type="button" id="tabort" value="Ta bort" onClick={this.removeKurs}></input>
+                </div>
+            );
+        }
+    }
 
 	function updateEditCourseListIA(test) {
 		this.setState({
@@ -512,6 +556,7 @@
 		<RemovePersonal />
 		<AddCourse />
 		<RemoveCourse/>
+		<RemoveCourseBDA/>
 		<EditCourse />
 		</div>,
 		document.getElementById("root")
