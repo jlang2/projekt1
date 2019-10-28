@@ -74,7 +74,7 @@ th#p4 {
 /*DROP DOWN MENY*/
 .dropbtn {
   background-color: #3498DB;
-  color: white;
+  color: black;
   padding: 16px;
   font-size: 16px;
   border: none;
@@ -90,7 +90,7 @@ th#p4 {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: black;
   min-width: 160px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -144,7 +144,7 @@ select#category {
 
 select#category {
   background-color: rgba(251, 195, 90, 0.5);
-  color: white;
+  color: black;
   padding: 5px;
   width: 100px;
   border: none;
@@ -191,7 +191,7 @@ select#kurserSelect {
 
 select#kurserSelect {
   background-color: rgba(151, 114, 45, 0.5);
-  color: white;
+  color: black;
   padding: 5px;
   width: 250px;
   border: none;
@@ -237,7 +237,7 @@ select#personalSelect {
 
 select#personalSelect {
   background-color: rgba(151, 114, 45, 0.5);
-  color: white;
+  color: black;
   padding: 5px;
   width: 250px;
   border: none;
@@ -278,7 +278,7 @@ select#personalSelect select option {
 /*BUTTON CSS*/
 
 input#button {
-  color:white;
+  color:black;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background: #e6c772;
@@ -317,7 +317,7 @@ select#personalSelect2 {
 
 select#personalSelect2 {
   background-color: rgba(251, 195, 90, 0.5);
-  color: white;
+  color: black;
   padding: 5px;
   width: 250px;
   border: none;
@@ -363,7 +363,7 @@ select#kurserSelect2 {
 
 select#kurserSelect2 {
   background-color: rgba(251, 195, 90, 0.5);
-  color: white;
+  color: black;
   padding: 5px;
   width: 250px;
   border: none;
@@ -402,7 +402,7 @@ select#kurserSelect2 select option {
 
 /*button*/
 input#buttonlektor {
-  color:white;
+  color:black;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background: #e6c772;
@@ -413,7 +413,7 @@ input#buttonlektor {
 
 }
 input#laggtill {
-  color:white;
+  color:black;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background: #e6c772;
@@ -425,7 +425,7 @@ input#laggtill {
 }
 
 input#laggkurs {
-  color:white;
+  color:black;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background: #e6c772;
@@ -436,7 +436,7 @@ input#laggkurs {
 
 }
 input#tabort {
-  color:white;
+  color:black;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background: #e6c772;
@@ -447,7 +447,7 @@ input#tabort {
 
 }
 input#redigerandra {
-  color:white;
+  color:black;
   border-radius: 4px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   background: #e6c772;
@@ -466,7 +466,7 @@ select#editcourse-select {
 
 select#editcourse-select  {
   background-color: rgba(251, 195, 90, 0.5);
-  color: white;
+  color: black;
   padding: 5px;
   width: 250px;
   border: none;
@@ -511,7 +511,7 @@ select#kursSelect{
 
 select#kursSelect  {
   background-color: rgba(251, 195, 90, 0.5);
-  color: white;
+  color: black;
   padding: 5px;
   width: 250px;
   border: none;
@@ -556,7 +556,7 @@ select#kurs-select{
 
 select#kurs-select  {
   background-color: rgba(251, 195, 90, 0.5);
-  color: white;
+  color: black;
   padding: 5px;
   margin: 5px;
   width: 250px;
@@ -602,7 +602,7 @@ select#period{
 
 select#period  {
   background-color: rgba(251, 195, 90, 0.5);
-  color: white;
+  color: black;
   padding: 5px;
   width: 250px;
   border: none;
